@@ -33,7 +33,7 @@
     <string name="prompt_education">Education</string>
     <string name="title_activity_main">MainActivity</string>
 
-    </string>
+
     <string-array name="education_array">
         <item>Primary School</item>
         <item>Middle School</item>
