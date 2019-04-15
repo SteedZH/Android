@@ -13,14 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TutorAdjustActivity"></activity>
-        <activity android:name=".TutorRequestActivity" />
-        <activity android:name=".TutorMainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".TutorAdjustActivity" />
+        <activity android:name=".TutorRequestActivity" />
+        <activity android:name=".TutorMainActivity" />
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".StudentNeedsActivity" />
         <activity android:name=".StudentMainActivity" />
