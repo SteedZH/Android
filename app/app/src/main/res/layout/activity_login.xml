@@ -79,11 +79,17 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/sign_up_student"
+                android:onClick="signupStudent"
+                android:clickable="true"
                 android:text="@string/action_sign_up_student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/sign_up_tutor"
+                android:onClick="signupTutor"
+                android:clickable="true"
                 android:text="@string/action_sign_up_tutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

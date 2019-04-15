@@ -30,6 +30,7 @@
     <string name="prompt_address">Address</string>
     <string name="prompt_postcode">Postcode</string>
     <string name="prompt_education">Education</string>
+    <string name="title_activity_main">MainActivity</string>
 
 
 </resources>
