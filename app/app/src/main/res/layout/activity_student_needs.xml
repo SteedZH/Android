@@ -82,13 +82,13 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/needs_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Confirm" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/needs_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back" />
