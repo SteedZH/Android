@@ -14,6 +14,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <!-- Strings related to register student -->
@@ -31,5 +32,13 @@
     <string name="prompt_postcode">Postcode</string>
     <string name="prompt_education">Education</string>
 
-
+    </string>
+    <string-array name="education_array">
+        <item>Primary School</item>
+        <item>Middle School</item>
+        <item>High School</item>
+        <item>Bachelor</item>
+        <item>Master</item>
+        <item>Doctor</item>
+    </string-array>
 </resources>
