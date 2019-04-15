@@ -33,6 +33,11 @@
     <string name="prompt_education">Education</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <!-- Strings related to Admin Main -->
+    <string name="title_admin_portal">Admin Portal</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_manage_category">Manage Tutor Categories</string>
+
 
     <string-array name="education_array">
         <item>Primary School</item>

@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,23 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".StudentRegisterActivity"
-            android:label="@string/title_activity_student_register"></activity>
-        <activity
-            android:name=".TutorRegisterActivity"
-            android:label="@string/title_activity_tutor_register"></activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".AdminMainActivity"
+            android:label="@string/title_admin_portal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StudentRegisterActivity"
+            android:label="@string/title_activity_student_register" />
+        <activity
+            android:name=".TutorRegisterActivity"
+            android:label="@string/title_activity_tutor_register" />
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+
         </activity>
     </application>
 
