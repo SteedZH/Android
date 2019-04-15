@@ -17,16 +17,18 @@ public class StudentRegisterActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
+                /*
                 Intent homeIntent = new Intent(this, LoginActivity.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
+                */
+                finish();
                 return true;
         }
         return (super.onOptionsItemSelected(menuItem));

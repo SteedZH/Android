@@ -27,6 +27,14 @@
         <activity android:name=".StudentNeedsActivity" />
         <activity android:name=".StudentMainActivity" />
         <activity
+            android:name=".AdminMainActivity"
+            android:label="@string/title_admin_portal" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -37,6 +45,7 @@
             android:name=".TutorRegisterActivity"
             android:label="@string/title_activity_tutor_register" />
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
 
