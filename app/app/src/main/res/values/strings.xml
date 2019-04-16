@@ -35,8 +35,11 @@
 
     <!-- Strings related to Admin Main -->
     <string name="title_admin_portal">Admin Portal</string>
+    <string name="title_tutor_application_requests">Tutor Application Requests</string>
     <string name="action_logout">Logout</string>
     <string name="action_manage_category">Manage Tutor Categories</string>
+    <string name="action_search">Search</string>
+    <string name="prompt_search_tutor">Enter a Tutor name</string>
 
 
     <string-array name="education_array">
