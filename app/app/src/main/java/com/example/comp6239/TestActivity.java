@@ -42,5 +42,16 @@ public class TestActivity extends AppCompatActivity {
                 TestActivity.this.finish();
             }
         });
+
+        Button admin = findViewById(R.id.button11);
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(TestActivity.this, AdminMainActivity.class);
+                startActivity(intent);
+                TestActivity.this.finish();
+            }
+        });
     }
 }

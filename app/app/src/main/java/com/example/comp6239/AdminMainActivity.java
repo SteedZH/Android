@@ -13,15 +13,12 @@ import java.util.List;
 
 public class AdminMainActivity extends AppCompatActivity {
 
-    private String username;
     private List<Tutor> tutorRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
-
-        username = "TO BE COMPLETED";
     }
 
     @Override
@@ -29,7 +26,7 @@ public class AdminMainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_admin_main, menu);
         MenuItem btnLogout = menu.findItem(R.id.menuLogout);
-        btnLogout.setTitle(getResources().getString(R.string.action_logout) + " (" + username + ")");
+        btnLogout.setTitle(getResources().getString(R.string.action_logout) + " (" + AppUser.getUsername() + ")");
         return true;
     }
 
@@ -52,6 +49,8 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
     public void logout() {
+        AppUser.logout();
+
         Intent intent = new Intent(AdminMainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
