@@ -3,7 +3,7 @@ package com.example.comp6239;
 public class AppUser {
     private static int permission = 0;
 
-    private static String username = "Dunno";
+    private static String username = "DUNNO";
     private static String email = "email@dunno.com";
     private static String authToken = "123456";
 
