@@ -5,8 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.example.comp6239.utility.ListAdapter;
+import com.example.comp6239.utility.ListViewData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TutorMainActivity extends AppCompatActivity {
+
+    private List<ListViewData> data_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +31,13 @@ public class TutorMainActivity extends AppCompatActivity {
                 TutorMainActivity.this.finish();
             }
         });
+        initData();
+        ListAdapter adapter=new ListAdapter(TutorMainActivity.this, R.layout.listview_tutor_mian,data_list);
+        ListView listView=findViewById(R.id.tutor_main_list_view);
+        listView.setAdapter(adapter);
+    }
+
+    private void initData(){
+        data_list.add(new ListViewData("student1","13:00-14:00"));
     }
 }
