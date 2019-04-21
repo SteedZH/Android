@@ -1,0 +1,230 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Subjects
+  # put the contact info for your development or API team
+  contact:
+    email: ytl1u18@soton.ac.uk
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admin
+  description: Secured Admin-only calls, can modify subjects
+- name: student
+  description: Student Account
+
+paths:
+  /get_subjects:
+    get:
+      tags:
+      - student
+      summary: create new subject
+      operationId: get_subjects
+      description: |
+        Getting a list of available subjects within the system. 
+      produces:
+      - application/json
+      responses:
+        200:
+          description: subject created successfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+        500:
+          description: server error
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+  /set_subject:
+    post:
+      tags:
+      - admin
+      summary: create new subject
+      operationId: set_subject
+      description: |
+        By passing in the appropriate options, you can create a new subject category to the system. 
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: name
+        description: the name of the subject category
+        required: false
+        type: string
+      responses:
+        200:
+          description: subject created successfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              subject_id:
+                type: integer
+                format: int32
+                example: 1
+              name:
+                type: string
+                example: Subject Name 1
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+        400:
+          description: duplicated name
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+              detail:
+                type: string
+                example: DUPLICATED_NAME
+              name:
+                type: string
+                example: Subject Name 1
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+  /update_subject:
+    post:
+      tags:
+      - admin
+      summary: update existing subject
+      operationId: update_subject
+      description: |
+        By passing a subject id and the new subject name, you can make changes to an existing subject category to the system. 
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: subject_id
+        description: the id of an existing subject category
+        required: false
+        type: integer
+        format: int32
+      - in: query
+        name: new_name
+        description: the new subject name of an existing subject category
+        required: false
+        type: string
+      responses:
+        200:
+          description: subject updated successfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              subject_id:
+                type: integer
+                format: int32
+                example: 1
+              name:
+                type: string
+                example: New Subject Name 1
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+        400:
+          description: duplicated name
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+              detail:
+                type: string
+                example: DUPLICATED_NAME
+              name:
+                type: string
+                example: Subject Name 1
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+  /delete_subject:
+    delete:
+      tags:
+      - admin
+      summary: update existing subject
+      operationId: delete_subject
+      description: |
+        By passing a subject id, you can delete an existing subject category from the system. This will also delete those tutors who are in the subject category. 
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: subject_id
+        description: the id of an existing subject category
+        required: false
+        type: integer
+        format: int32
+      responses:
+        200:
+          description: subject delete successfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+        400:
+          description: delete to an non-existed subject id
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+              detail:
+                type: string
+                example: ID_NOT_EXISTED
+              subjects:
+                type: array
+                items:
+                  $ref: '#/definitions/Subject'
+definitions:
+  Subject:
+    type: object
+    required:
+    - subject_id
+    - name
+    properties:
+      subject_id:
+        type: integer
+        format: int32
+        example: 1
+      name:
+        type: string
+        example: Subject Name 1
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /samlai1306/Subjects/1.0.0
+schemes:
+ - https

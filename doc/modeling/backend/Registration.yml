@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  description: This is a simple API for registration
+  version: 1.0.0
+  title: Registration API
+  # put the contact info for your development or API team
+  contact:
+    email: ytl1u18@soton.ac.uk
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+- name: public user
+  description: Operations available to regular developers
+
+
+paths:
+  /reg_student:
+    post:
+      tags:
+      - public user
+      summary: Register a student account
+      operationId: reg_student
+      description: |
+        By passing in the required data fields, you can register a student account. 
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: username
+        description: the log on username of a student
+        required: true
+        type: string
+      - in: query
+        name: password
+        description: the log on password of a student
+        required: true
+        type: string
+      - in: query
+        name: email
+        description: the registration email of a student
+        required: true
+        type: string
+      - in: query
+        name: first_name
+        description: the first name of a student
+        required: true
+        type: string
+      - in: query
+        name: last_name
+        description: the last name of a student
+        required: true
+        type: string
+      - in: query
+        name: gender
+        description: the gender of a student
+        required: true
+        type: string
+      - in: query
+        name: dob
+        description: the date of birth of a student
+        required: true
+        type: string
+        format: date
+      - in: query
+        name: year
+        description: date of birth (year)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1920
+        maximum: 2019
+      - in: query
+        name: month
+        description: date of birth (month)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 12
+      - in: query
+        name: day
+        description: date of birth (day)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 31
+      responses:
+        200:
+          description: student account created sucessfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              userid:
+                type: integer
+                format: int32
+                example: 1
+              username:
+                type: string
+                example: myusername1
+              email:
+                type: string
+                example: myemail1@example.com
+        400:
+          description: Registration failiure
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+              username:
+                type: string
+                example: The username "myusername1" is used. 
+              email:
+                type: string
+                example: The email "myemail1@example.com" is registered
+  /reg_tutor:
+    post:
+      tags:
+      - public user
+      summary: Register a tutor account
+      operationId: reg_tutor
+      description: |
+        By passing in the required data fields, you can apply to register as a tutor. 
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: username
+        description: the log on username of a tutor
+        required: true
+        type: string
+      - in: query
+        name: password
+        description: the log on password of a tutor
+        required: true
+        type: string
+      - in: query
+        name: email
+        description: the registration email of a tutor
+        required: true
+        type: string
+      - in: query
+        name: first_name
+        description: the first name of a tutor
+        required: true
+        type: string
+      - in: query
+        name: last_name
+        description: the last name of a tutor
+        required: true
+        type: string
+      - in: query
+        name: gender
+        description: the gender of a tutor
+        required: true
+        type: string
+      - in: query
+        name: dob
+        description: the date of birth of a tutor
+        required: true
+        type: string
+        format: date
+      - in: query
+        name: year
+        description: date of birth (year)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1920
+        maximum: 2019
+      - in: query
+        name: month
+        description: date of birth (month)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 12
+      - in: query
+        name: day
+        description: date of birth (day)
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 31
+      responses:
+        200:
+          description: tutor account created sucessfully
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: SUCCESS
+              userid:
+                type: integer
+                format: int32
+                example: 1
+              username:
+                type: string
+                example: myusername2
+              email:
+                type: string
+                example: myemail2@example.com
+        400:
+          description: Registration failiure
+          schema:
+            type: object
+            properties:
+              result:
+                type: string
+                example: FAIL
+              username:
+                type: string
+                example: The username "myusername2" is used. 
+              email:
+                type: string
+                example: The email "myemail2@example.com" is registered
+    
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /samlai1306/StudentRegistration/1.0.0
+schemes:
+ - https
