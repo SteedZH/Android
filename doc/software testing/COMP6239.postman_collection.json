@@ -42,6 +42,81 @@
 			"response": []
 		},
 		{
+			"name": "REG_TUTOR",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"testtutor1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Tutor\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor1@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":2,\r\n\t\"postcode\":\"SO18 2NU\",\r\n\t\"address\":\"Main Reception, Wessex Lane Hall, Wessex Lane, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/registration/reg_tutor.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"registration",
+						"reg_tutor.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"password\":\"123456aA\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/authentication/login.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"authentication",
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET_SUBJECTS",
 			"request": {
 				"method": "GET",
@@ -74,10 +149,17 @@
 			"name": "SET_SUBJECT",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\r\n\t\"name\":\"My Subject Name 1\"\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1/COMP6239/server/api/Subject/set_subject.php",
@@ -94,6 +176,117 @@
 						"api",
 						"Subject",
 						"set_subject.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DETELE_SUBJECT",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"subject_id\":1\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Subject/delete_subject.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Subject",
+						"delete_subject.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE_SUBJECT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"subject_id\":2,\r\n\t\"name\":\"New Subject Name 2\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Subject/update_subject.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Subject",
+						"update_subject.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TUTORS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"tutorName\":\"Tutor\",\r\n\t\"tutorSubject\":2,\r\n\t\"tutorLocation\":\"SO17\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Tutor/get_tutors.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Tutor",
+						"get_tutors.php"
 					]
 				}
 			},
