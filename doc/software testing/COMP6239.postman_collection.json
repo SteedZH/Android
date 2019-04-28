@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "20dde0e4-85f0-4404-84b1-48636d6c6488",
+		"name": "COMP6239",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "REG_STUDENT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "REG",
+						"value": "{\n\t\"username\":\"teststudent1\",\n\t\"firstname\":\"Registration Testing\",\n\t\"lastname\":\"Student\",\n\t\"gender\":\"F\",\n\t\"dob\":\"2000-01-01\"\n\t\"email\":\"testplayer1\",\n\t\"password\":\"123456aA\"\n}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/registration/reg_student.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"registration",
+						"reg_student.php"
+					]
+				},
+				"description": "Register a Student Account"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_SUBJECTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Subject/get_subjects.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Subject",
+						"get_subjects.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET_SUBJECT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Subject/set_subject.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Subject",
+						"set_subject.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
