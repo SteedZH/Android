@@ -53,6 +53,25 @@
             
             $sql =  "UPDATE Tutor SET Tutor.user_id = " . $user_id . " WHERE is_approved = " . $is_approved . ";";
             echo $sql;
+            
+            if ($conn->query($sql) === TRUE) {
+                echo "Tutor\'s approvement status updated. ";
+                $return_json_obj['result'] = 'SUCCESS';
+                $return_json_obj['user_id'] = $subject_id;
+                $return_json_obj['is_approved'] = $name;
+                
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+                
+                $return_json_obj['code'] = 'DB_UPDATE_FAIL';
+                $return_json_obj['details'] = 'There is a database error when updating to a tutor\'s approvement status. ';
+                $conn->close();
+                return false;
+                
+            }
+            
+            $sql =  "SELECT * FROM Tutor, User WHERE Tutor.user_id = User.user_id AND is_approved = 0;";
+            echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
