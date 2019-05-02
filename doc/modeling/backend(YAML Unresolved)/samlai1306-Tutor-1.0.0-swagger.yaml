@@ -1,0 +1,123 @@
+swagger: '2.0'
+info:
+  description: This is a simple API for registration
+  version: 1.0.0
+  title: Tutor API
+  # put the contact info for your development or API team
+  contact:
+    email: ytl1u18@soton.ac.uk
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: student
+  description: Operations available to regular developers
+
+
+paths:
+  /get_tutors:
+     get:
+        tags: 
+        - student
+        summary: Get all the tutors meeting conditions
+        operationId: get_tutors
+        description: |
+            You could get all the tutors meeting conitionos
+        produces:
+        - application/json
+        parameters:
+        - in: query
+          name: tutorName
+          description: search tutors by tutors' name
+          required: false
+          type: string
+        - in: query
+          name: tutorLocation
+          description: search tutors by tutors' location
+          required: false
+          type: string
+        - in: query
+          name: tutorSubject
+          description: search tutors by tutors' subject(default)
+          required: true
+          type: string
+        responses: 
+          200: 
+            description: get tutors successfully
+            schema: 
+              type: array
+              items: 
+                type: object
+                properties: 
+                 name: 
+                  type: string
+                  example: "Alice"
+                 location: 
+                  type: string
+                  example: "Southampton"
+                 subject:
+                  type: string
+                  example: "English"
+          400:
+            description: fail to get tutors' list
+            schema:
+                type: object
+                properties:
+                   result:
+                     type: string
+                     example: "FAIL"   
+  /get_tutor_details:
+      get: 
+        tags:
+        - student
+        summary: Get specific tutor's details
+        operationId: get_tutordetails
+        description: |
+            You could get a tutor details
+        produces:
+        - application/json
+        parameters:
+        - in: query
+          name: id
+          description: search a tutor by tutor's id
+          required: true
+          type: integer
+          format: int32
+        responses:
+          200:
+            description: get details successfully
+            schema: 
+             type: object
+             properties: 
+                name: 
+                  type: string
+                  example: "Alice"
+                location: 
+                  type: string
+                  example: "Southampton"
+                subject:
+                  type: string
+                  example: "English"
+                timeArrange:
+                  type: string
+                  example: "12:00-13:00"
+          400:
+            description: fail to get details 
+            schema:
+                type: string
+                example: "fail to ..."
+            
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+# basePath: /samlai1306/StudentRegistration/1.0.0
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+# basePath: /Android-coursework/AndroidDataChange/1.0.0
+# Added by API Auto Mocking Plugin
+# basePath: /samlai1306/JunZhou/1.0.0
+# Added by API Auto Mocking Plugin
+basePath: /samlai1306/Tutor/1.0.0

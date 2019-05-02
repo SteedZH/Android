@@ -36,6 +36,7 @@
         $isValueValid = true;
         
         $return_json_obj['result'] = 'FAIL';
+        $subjects = new array();
         
         try{
             // Check null

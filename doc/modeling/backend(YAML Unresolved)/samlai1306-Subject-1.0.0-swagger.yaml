@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: This is a simple API
   version: 1.0.0
-  title: Subjects
+  title: Subject API
   # put the contact info for your development or API team
   contact:
     email: ytl1u18@soton.ac.uk
@@ -225,6 +225,8 @@ definitions:
         example: Subject Name 1
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
-basePath: /samlai1306/Subjects/1.0.0
+# basePath: /samlai1306/Subjects/1.0.0
 schemes:
  - https
+# Added by API Auto Mocking Plugin
+basePath: /samlai1306/Subject/1.0.0
