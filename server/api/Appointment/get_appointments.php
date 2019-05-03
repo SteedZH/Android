@@ -11,14 +11,8 @@
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
     
-    $tutor_id = 0;
     
-    if (isset($receive_json_obj["tutor_id"])) {
-        $tutor_id = $receive_json_obj["tutor_id"];
-        
-    }
-    
-    getTutorDetails($tutor_id);
+    getAppointments();
     
     flush();
     ob_start();
@@ -27,7 +21,7 @@
     
     
     
-    function getTutorDetails($tutor_id) {
+    function searchTutorRequests() {
         global $return_json_arr;
         $isValueValid = true;
         $tutors = array();
@@ -35,14 +29,6 @@
         $return_json_arr['result'] = 'FAIL';
         
         try{
-            // Check null
-            if ($tutor_id <= 0) {
-                $return_json_arr['code'] = 'NULL_TUTOR_ID';
-                $return_json_arr['details'] = 'A Tutor Id must be specified. ';
-                return false;
-                
-            }
-            
             // instantiate database connection
             $db = new Database();
             $conn = $db->getConnection();
@@ -56,35 +42,25 @@
                 
             }
             
-            $sql =  "SELECT * FROM Tutor, User, TimePreference WHERE User.user_id = " . $tutor_id . " AND Tutor.user_id = User.user_id AND Tutor.user_id = TimePreference.user_id;";
-            
+            $sql =  "SELECT * FROM Tutor, User WHERE Tutor.user_id = User.user_id AND is_approved = 0;";
+            echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
                 // output data of each row
-                $datetimes = array();
                 while($row = $result->fetch_assoc()) {
-                    $return_json_arr['username'] = $row["username"];
-                    $return_json_arr['email'] = $row["email"];
-                    $return_json_arr['subject_id'] = $row["subject_id"];
-                    $return_json_arr['first_name'] = $row["first_name"];
-                    $return_json_arr['last_name'] = $row["last_name"];
-                    $return_json_arr['dob'] = $row["dob"];
-                    $return_json_arr['gender'] = $row["gender"];
-                    $return_json_arr['postcode'] = $row["postcode"];
-                    $return_json_arr['address'] = $row["address"];
-                    $return_json_arr['education'] = $row["education"];
-                    $return_json_arr['is_approved'] = $row["is_approved"];
-                    $datetime['weekday'] = $row["weekday"];
-                    $datetime['datetime'] = $row["datetime"];
-                    $datetimes[]=$datetime;
+                    $tutor = array();
+                    //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+                    $tutor['email'] = $row["email"];
+                    $tutor['subject_id'] = $row["subject_id"];
+                    $tutors[] = $tutor;
                 }
-                $return_json_arr['daytime'] = $datetimes;
+                $return_json_arr['tutors'] = $tutors;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no such tutor record in the database. ';
+                $return_json_arr['details'] = 'There is no tutor application records in the database. ';
                 $conn->close();
                 return false;
                 

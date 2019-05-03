@@ -11,14 +11,21 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "REG",
-						"value": "{\n\t\"username\":\"teststudent1\",\n\t\"firstname\":\"Registration Testing\",\n\t\"lastname\":\"Student\",\n\t\"gender\":\"F\",\n\t\"dob\":\"2000-01-01\"\n\t\"email\":\"testplayer1\",\n\t\"password\":\"123456aA\"\n}",
+						"key": "REG_STUDENT",
+						"value": "{\n\t\"username\":\"teststudent1\",\n\t\"firstname\":\"Registration Testing\",\n\t\"lastname\":\"Student\",\n\t\"gender\":\"F\",\n\t\"dob\":\"2000-01-01\",\n\t\"email\":\"testplayer1\",\n\t\"password\":\"123456aA\"\n}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Student\",\r\n\t\"gender\":\"F\",\r\n\t\"dob\":\"2000-01-01\",\r\n\t\"email\":\"teststudent1@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1/COMP6239/server/api/registration/reg_student.php",
@@ -55,7 +62,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"username\":\"testtutor1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Tutor\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor1@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":2,\r\n\t\"postcode\":\"SO18 2NU\",\r\n\t\"address\":\"Main Reception, Wessex Lane Hall, Wessex Lane, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
+					"raw": "{\r\n\t\"username\":\"testtutor4\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Tutor\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor4@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":1,\r\n\t\"postcode\":\"SO17 1AB\",\r\n\t\"address\":\"Main Reception, Wessex Lane Hall, Wessex Lane, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1/COMP6239/server/api/registration/reg_tutor.php",
@@ -287,6 +294,231 @@
 						"api",
 						"Tutor",
 						"get_tutors.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TUTOR_DETAILS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tutor_id\":6\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Tutor/get_tutor_details.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Tutor",
+						"get_tutor_details.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TUTOR_REQUESTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Tutor/get_tutor_requests.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Tutor",
+						"get_tutor_requests.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE_TUTOR_APPROVALS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"user_id\":26,\r\n\t\"is_approved\":1\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Tutor/update_tutor_approvals.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Tutor",
+						"update_tutor_approvals.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET_MESSAGE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sender_user_id\":26,\r\n\t\"receiver_user_id\":27,\r\n\t\"details\":\"Well... I think you should practice on your own, dont waste my time so bye \"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Message/set_message.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Message",
+						"set_message.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_MESSAGES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sender_user_id\":27,\r\n\t\"receiver_user_id\":26\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Message/get_messages.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Message",
+						"get_messages.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET_TUTOR_TIME",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":26,\n\t\"daytime\":[\n\t\t{\"weekday\":1,\"time\":3},\n\t\t{\"weekday\":2,\"time\":2},\n\t\t{\"weekday\":7,\"time\":1}\n\t\t]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Tutor/set_tutor_time.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Tutor",
+						"set_tutor_time.php"
 					]
 				}
 			},
