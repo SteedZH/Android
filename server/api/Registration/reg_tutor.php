@@ -110,8 +110,8 @@
             }
             
             $sql =  "INSERT INTO User (username, email, password, password_hash) VALUES ('" . $username . "', '" . $email . "', '" . $password . "', SHA2('" . $password . "', 256));" . 
-                    "INSERT INTO Tutor (user_id, subject_id, first_name, last_name, dob, gender, postcode, address, educations) VALUES (" . 
-                    "(SELECT user_id FROM View_User WHERE username = '" . $username . "'), " . $subjectid . ", '" . $firstname . "', '" . $lastname . "', '" . $dob . "', '" . $gender . "', '" . $postcode . "', '" . $address . "', '" . $educations . "');";
+                    "INSERT INTO Tutor (user_id, subject_id, first_name, last_name, dob, gender, postcode, address, educations, is_approved) VALUES (" . 
+                    "(SELECT user_id FROM View_User WHERE username = '" . $username . "'), " . $subjectid . ", '" . $firstname . "', '" . $lastname . "', '" . $dob . "', '" . $gender . "', '" . $postcode . "', '" . $address . "', '" . $educations . "', 0);";
             
             if ($conn->multi_query($sql) === TRUE) {
                 echo "New records created. ";

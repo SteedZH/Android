@@ -59,6 +59,7 @@
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
                 $return_json_arr['details'] = 'There is no subject records in the database. ';
+                $return_json_arr['subjects'] = $subjects;
                 $conn->close();
                 return false;
                 
