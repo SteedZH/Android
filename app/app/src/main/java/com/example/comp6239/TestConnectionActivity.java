@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -37,10 +38,13 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
     public Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             //super.handleMessage(msg);
-            mConsoleStr.append(msg.obj.toString() + "   " + getTime(System.currentTimeMillis()) + "\n");
+            mConsoleStr.append(msg.obj.toString()+ "\n"); //add time + "  " + getTime(System.currentTimeMillis())
             mConsoleTxt.setText(mConsoleStr);
         }
     };
+
+    private String myId = "11";
+    private String counterpartId ="12";
 
 
     @Override
@@ -56,6 +60,7 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
     private void initView() {
         mMessageEdt = findViewById(R.id.msg_edt);
         mConsoleTxt = findViewById(R.id.console_txt);
+        mConsoleTxt.setMovementMethod(ScrollingMovementMethod.getInstance());
         findViewById(R.id.start_btn).setOnClickListener(this);
         findViewById(R.id.send_btn).setOnClickListener(this);
         findViewById(R.id.clear_btn).setOnClickListener(this);
@@ -72,9 +77,14 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
             public void run() {
                 try {
                     isStartRecieveMsg = true;
-                    mSocket = new Socket("10.14.151.185", 9999);
+                    mSocket = new Socket("35.177.19.117", 9999);
                     System.out.println("successfully connect");
+
+                    mWriter = new DataOutputStream(mSocket.getOutputStream());
                     mReader = new DataInputStream(mSocket.getInputStream());
+
+                    String ID = myId+":"+counterpartId;
+                    mWriter.writeUTF(ID);
 
                     //接收来自服务器的消息
                     while(isStartRecieveMsg) {
@@ -126,7 +136,6 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
      */
     protected void sendMsg() {
         try {
-            mWriter = new DataOutputStream(mSocket.getOutputStream());
             String msg = mMessageEdt.getText().toString().trim();
             mWriter.writeUTF(msg);
             mWriter.flush();
@@ -149,13 +158,6 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
         Date d = new Date(millTime);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(d);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
 }

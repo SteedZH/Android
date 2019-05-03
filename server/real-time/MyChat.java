@@ -1,17 +1,20 @@
-package com.steed.test;
-/**
+package com.steed.server; /**
  * 多线程多客户
  * 目标：加入容器实现群聊
  */
+
+import com.steed.server.MySQL;
+import com.steed.server.Utils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Chat {
+public class MyChat {
     private static CopyOnWriteArrayList<Channel> all = new CopyOnWriteArrayList<Channel>();//多线程中需要改和遍历的最好不用ArrayList, 用这个并发容器
     public static void main(String[] args) throws IOException {
         System.out.println("----Server----");
@@ -26,12 +29,13 @@ public class Chat {
     }
 
     //一个客户一个线程
-    static class Channel implements Runnable{
+   static class Channel implements Runnable{
         private DataInputStream dis;
         private DataOutputStream dos;
         private Socket client;
         private boolean isRunning;
-        private String name;
+        private String MyId;
+        private String CounterpartId;
 
         //接收消息
         public Channel(Socket client){
@@ -40,7 +44,12 @@ public class Chat {
                 dis = new DataInputStream(client.getInputStream());
                 dos = new DataOutputStream(client.getOutputStream());
                 isRunning =true;
-                this.name = receive();
+                String ID = receive();
+                int index = ID.indexOf(":");
+                this.MyId = ID.substring(0, index);
+                this.CounterpartId = ID.substring(index+1);
+                System.out.println(MyId);
+                System.out.println(CounterpartId);
             } catch (IOException e) {
                 System.out.printf("----client exception----");
                 release();
@@ -75,42 +84,42 @@ public class Chat {
          * @param msg
          */
         private void sendOthers(String msg) {
-            boolean isPrivate = msg.startsWith("@");
-            if (isPrivate) {
-                int idx = msg.indexOf(":");
-                String targetName = msg.substring(1,idx);
-                msg = msg.substring(idx + 1);
-                for (Channel others : all) {
-                    if (others.name.equals(targetName)) {
-                        others.send(this.name+" send privately: "+msg);
+            Boolean isFind = false;
+            MySQL mySQL = new MySQL();
+            for (Channel others : all) {
+                    if (others.MyId.equals(CounterpartId)) {
+                        others.send(msg);
+                        isFind = true;
+                        mySQL.writeToSQL(MyId, CounterpartId, msg, 1);
                         break;
                     }
                 }
-            }else {
-                for (Channel others : all) {
-                    if (others == this) {
-                        continue;
-                    }
-                    others.send(this.name + " said: " + msg);
+            if(!isFind) {
+                mySQL.writeToSQL(MyId, CounterpartId, msg, 0);
                 }
             }
-        }
+
 
         //释放资源
         private void release() {
             this.isRunning = false;
             Utils.close(dis, dos, client);
             all.remove(this);
-            sendOthers(this.name+" has left...");
         }
 
         @Override
         public void run() {
+            MySQL mySQL = new MySQL();
+            ArrayList<String> res = mySQL.readFromSQL(this.MyId);
+            if (res != null) {
+                for (int i = 0; i < res.size(); i++) {
+                    this.send(res.get(i));
+                }
+            }
             while (isRunning) {
                 String msg = receive();
                 if (!msg.equals("")) {
                     System.out.println("client "+client.hashCode()+" send: "+ msg);
-                    //send(msg);
                     sendOthers(msg);
                 }
             }
