@@ -450,7 +450,7 @@
 			"response": []
 		},
 		{
-			"name": "GET_MESSAGES",
+			"name": "GET_CHAT_MESSAGES",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -460,8 +460,8 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -469,7 +469,7 @@
 					"raw": "{\r\n\t\"sender_user_id\":27,\r\n\t\"receiver_user_id\":26\r\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1/COMP6239/server/api/Message/get_messages.php",
+					"raw": "http://127.0.0.1/COMP6239/server/api/Message/get_chat_messages.php",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -482,7 +482,46 @@
 						"server",
 						"api",
 						"Message",
-						"get_messages.php"
+						"get_chat_messages.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_CHATS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sender_user_id\":27,\r\n\t\"receiver_user_id\":26\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/Message/get_chat_messages.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Message",
+						"get_chat_messages.php"
 					]
 				}
 			},
