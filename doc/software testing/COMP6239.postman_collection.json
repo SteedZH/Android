@@ -85,6 +85,35 @@
 			"response": []
 		},
 		{
+			"name": "REG_ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1/COMP6239/server/api/registration/reg_admin.php",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"registration",
+						"reg_admin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "LOGIN",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
