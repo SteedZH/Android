@@ -77,7 +77,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM Tutor, User WHERE Tutor.user_id = User.user_id AND is_approved = 0;";
+            $sql =  "SELECT * FROM View_Tutor WHERE is_approved = 0;";
             echo $sql;
             $result = $conn->query($sql);
             
@@ -86,6 +86,7 @@
                 while($row = $result->fetch_assoc()) {
                     $tutor = array();
                     //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+                    $tutor['user_id'] = $row["user_id"];
                     $tutor['email'] = $row["email"];
                     $tutor['subject_id'] = $row["subject_id"];
                     $tutors[] = $tutor;

@@ -38,7 +38,7 @@
     function login($username, $password) {
         global $return_json_arr;
         $isValueValid = true;
-        $user_id="";
+        $user_id="0";
         $sys_password="";
         
         $permission="0";
@@ -92,7 +92,7 @@
                 
             }
             
-            $sql =  "SELECT user_id, email, password, create_time FROM User WHERE username = '" . $username . "';";
+            $sql =  "SELECT user_id, email, password, create_time FROM View_User WHERE username = '" . $username . "';";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
@@ -115,11 +115,12 @@
             }
             
             if ($password === $sys_password) {
-                $return_json_arr['username']=$user_id;
+                $return_json_arr['user_id']=$user_id;
+                $return_json_arr['username']=$username;
                 $return_json_arr['email']=$email;
                 
                 //Administrator
-                $sql =  "SELECT user_id FROM Administrator WHERE user_id = " . $user_id . ";";
+                $sql =  "SELECT user_id FROM View_Administrator WHERE user_id = " . $user_id . ";";
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {
@@ -134,7 +135,7 @@
                 }
                 
                 //Tutor
-                $sql =  "SELECT * FROM Tutor WHERE user_id = " . $user_id . ";";
+                $sql =  "SELECT * FROM View_Tutor WHERE user_id = " . $user_id . ";";
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {
@@ -171,7 +172,7 @@
                 }
                 
                 //Student
-                $sql =  "SELECT * FROM Student WHERE user_id = " . $user_id . ";";
+                $sql =  "SELECT * FROM View_Student WHERE user_id = " . $user_id . ";";
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {

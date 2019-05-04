@@ -56,7 +56,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM Tutor, User, TimePreference WHERE User.user_id = " . $tutor_id . " AND Tutor.user_id = User.user_id AND Tutor.user_id = TimePreference.user_id;";
+            $sql =  "SELECT * FROM View_Tutor WHERE user_id = " . $tutor_id . ";";
             
             $result = $conn->query($sql);
             
@@ -64,6 +64,7 @@
                 // output data of each row
                 $datetimes = array();
                 while($row = $result->fetch_assoc()) {
+                    $return_json_arr['user_id'] = $row["user_id"];
                     $return_json_arr['username'] = $row["username"];
                     $return_json_arr['email'] = $row["email"];
                     $return_json_arr['subject_id'] = $row["subject_id"];
@@ -73,11 +74,15 @@
                     $return_json_arr['gender'] = $row["gender"];
                     $return_json_arr['postcode'] = $row["postcode"];
                     $return_json_arr['address'] = $row["address"];
-                    $return_json_arr['education'] = $row["education"];
+                    $return_json_arr['educations'] = $row["educations"];
                     $return_json_arr['is_approved'] = $row["is_approved"];
-                    $datetime['weekday'] = $row["weekday"];
-                    $datetime['datetime'] = $row["datetime"];
-                    $datetimes[]=$datetime;
+                    if(isset($row["weekday"]) && isset($row["datetime"])) {
+                        $datetime['weekday'] = $row["weekday"];
+                        $datetime['datetime'] = $row["datetime"];
+                        $datetimes[]=$datetime;
+                    }
+                    
+                    
                 }
                 $return_json_arr['daytime'] = $datetimes;
             } else {

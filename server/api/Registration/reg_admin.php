@@ -14,14 +14,6 @@
     $username = "";
     $password = "";
     $email = "";
-    $subjectid = 0;
-    $firstname = "";
-    $lastname = "";
-    $gender = "";
-    $dob = "";
-    $postcode = "";
-    $address = "";
-    $educations = "";
     
     
     if (isset($receive_json_obj["username"])) {
@@ -40,47 +32,7 @@
         
     }
     
-    if (isset($receive_json_obj["subject_id"])) {
-        $subjectid = $receive_json_obj["subject_id"];
-        
-    }
-    
-    if (isset($receive_json_obj["firstname"])) {
-        $firstname = $receive_json_obj["firstname"];
-        
-    }
-    
-    if (isset($receive_json_obj["lastname"])) {
-        $lastname = $receive_json_obj["lastname"];
-        
-    }
-    
-    if (isset($receive_json_obj["gender"])) {
-        $gender = $receive_json_obj["gender"];
-        
-    }
-    
-    if (isset($receive_json_obj["dob"])) {
-        $dob = $receive_json_obj["dob"];
-        
-    }
-    
-    if (isset($receive_json_obj["postcode"])) {
-        $postcode = $receive_json_obj["postcode"];
-        
-    }
-    
-    if (isset($receive_json_obj["address"])) {
-        $address = $receive_json_obj["address"];
-        
-    }
-    
-    if (isset($receive_json_obj["educations"])) {
-        $educations = $receive_json_obj["educations"];
-        
-    }
-    
-    registerTutor($username, $password, $email, $subjectid, $firstname, $lastname, $gender, $dob, $postcode, $address, $educations);
+    registerAdmin($username, $password, $email);
     
     flush();
     ob_start();
@@ -89,7 +41,7 @@
     
     
     
-    function registerTutor($username, $password, $email, $subjectid, $firstname, $lastname, $gender, $dob, $postcode, $address, $educations) {
+    function registerAdmin($username, $password, $email) {
         global $return_json_arr;
         $isValueValid = true;
         
@@ -110,8 +62,7 @@
             }
             
             $sql =  "INSERT INTO User (username, email, password, password_hash) VALUES ('" . $username . "', '" . $email . "', '" . $password . "', SHA2('" . $password . "', 256));" . 
-                    "INSERT INTO Tutor (user_id, subject_id, first_name, last_name, dob, gender, postcode, address, educations) VALUES (" . 
-                    "(SELECT user_id FROM View_User WHERE username = '" . $username . "'), " . $subjectid . ", '" . $firstname . "', '" . $lastname . "', '" . $dob . "', '" . $gender . "', '" . $postcode . "', '" . $address . "', '" . $educations . "');";
+                    "INSERT INTO Administrator (user_id) VALUES ((SELECT user_id FROM View_User WHERE username = '" . $username . "'));";
             
             if ($conn->multi_query($sql) === TRUE) {
                 echo "New records created. ";
@@ -119,7 +70,7 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_INSERT_FAIL';
-                $return_json_arr['details'] = 'There is a databaser error when inserting a tutor account record. ';
+                $return_json_arr['details'] = 'There is a database error when inserting an administrator account record. ';
                 $conn->close();
                 return false;
                 

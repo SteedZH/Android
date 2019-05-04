@@ -12,16 +12,12 @@
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
     
     $sender_user_id = 0;
-    $receiver_user_id = 0;
     
     if (isset($receive_json_obj["sender_user_id"])) {
         $sender_user_id = $receive_json_obj["sender_user_id"];
     }
-    if (isset($receive_json_obj["receiver_user_id"])) {
-        $receiver_user_id = $receive_json_obj["receiver_user_id"];
-    }
     
-    getMessages($sender_user_id, $receiver_user_id, $details);
+    getChats($sender_user_id);
     
     flush();
     ob_start();
@@ -30,7 +26,7 @@
     
     
     
-    function getMessages($sender_user_id, $receiver_user_id, $details) {
+    function getChats($sender_user_id) {
         global $return_json_obj;
         $isValueValid = true;
         $messages = array();
@@ -58,9 +54,9 @@
                 
             }
             
-            $sql =  "SELECT * FROM Message WHERE " . 
-                    "(sender_user_id = " . $sender_user_id . " AND receiver_user_id = " . $receiver_user_id . ") OR " . 
-                    "(sender_user_id = " . $receiver_user_id . " AND receiver_user_id = " . $sender_user_id . ") ORDER BY send_time DESC LIMIT 0, 20;";
+            $sql =  "SELECT Message.* FROM (SELECT MAX(message_id) AS message_id FROM Message " . 
+                    "WHERE " . $sender_user_id . " IN (sender_user_id,receiver_user_id) " . 
+                    "GROUP BY IF (" . $sender_user_id . " = sender_user_id, receiver_user_id, sender_user_id)) AS latest LEFT JOIN Message USING(message_id)";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
@@ -80,7 +76,7 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_obj['code'] = 'DB_SELECT_FAIL';
-                $return_json_obj['details'] = 'There is no related message records in the database. ';
+                $return_json_obj['details'] = 'There is no related chat records in the database. ';
                 $return_json_obj['messages'] = $messages;
                 $conn->close();
                 return false;

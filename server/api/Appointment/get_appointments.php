@@ -10,9 +10,13 @@
     ob_flush();
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
+    $tutor_id = 0;
     
+    if (isset($receive_json_obj["tutor_id"])) {
+        $tutor_id = $receive_json_obj["tutor_id"];
+    }
     
-    getAppointments();
+    getAppointments($tutor_id);
     
     flush();
     ob_start();
@@ -21,10 +25,10 @@
     
     
     
-    function searchTutorRequests() {
+    function getAppointments($tutor_id) {
         global $return_json_arr;
         $isValueValid = true;
-        $tutors = array();
+        $appointments = array();
         
         $return_json_arr['result'] = 'FAIL';
         
@@ -42,25 +46,26 @@
                 
             }
             
-            $sql =  "SELECT * FROM Tutor, User WHERE Tutor.user_id = User.user_id AND is_approved = 0;";
+            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
             echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    $tutor = array();
-                    //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-                    $tutor['email'] = $row["email"];
-                    $tutor['subject_id'] = $row["subject_id"];
-                    $tutors[] = $tutor;
+                    $appointment = array();
+                    $appointment['first_name'] = $row["first_name"];
+                    $appointment['gender'] = $row["gender"];
+                    $appointment['start_time'] = $row["start_time"];
+                    $appointment['end_time'] = $row["end_time"];
+                    $appointments[] = $appointment;
                 }
-                $return_json_arr['tutors'] = $tutors;
+                $return_json_arr['appointments'] = $appointments;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no tutor application records in the database. ';
+                $return_json_arr['details'] = 'There is no appointment records in the database. ';
                 $conn->close();
                 return false;
                 
