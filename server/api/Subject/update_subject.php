@@ -83,7 +83,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM Subject;";
+            $sql =  "SELECT * FROM View_Subject;";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {

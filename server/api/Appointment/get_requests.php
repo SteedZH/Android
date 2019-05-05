@@ -16,7 +16,7 @@
         $tutor_id = $receive_json_obj["tutor_id"];
     }
     
-    getAppointments($tutor_id);
+    getRequests($tutor_id);
     
     flush();
     ob_start();
@@ -25,7 +25,7 @@
     
     
     
-    function getAppointments($tutor_id) {
+    function getRequests($tutor_id) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();
@@ -46,7 +46,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
+            $sql =  "SELECT * FROM View_Request WHERE tutor_user_id = " . $tutor_id . ";";
             echo $sql;
             $result = $conn->query($sql);
             
@@ -61,12 +61,12 @@
                     $appointment['end_time'] = $row["end_time"];
                     $appointments[] = $appointment;
                 }
-                $return_json_arr['appointments'] = $appointments;
+                $return_json_arr['requests'] = $appointments;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no appointment records in the database. ';
+                $return_json_arr['details'] = 'There is no non-approved appointment records in the database. ';
                 $conn->close();
                 return false;
                 

@@ -58,9 +58,9 @@
                 
             }
             
-            $sql =  "SELECT * FROM Message WHERE " . 
+            $sql =  "SELECT * FROM View_Message WHERE " . 
                     "(sender_user_id = " . $sender_user_id . " AND receiver_user_id = " . $receiver_user_id . ") OR " . 
-                    "(sender_user_id = " . $receiver_user_id . " AND receiver_user_id = " . $sender_user_id . ") ORDER BY send_time DESC LIMIT 0, 20;";
+                    "(sender_user_id = " . $receiver_user_id . " AND receiver_user_id = " . $sender_user_id . ") ORDER BY send_time DESC LIMIT 0, 50;";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
@@ -68,6 +68,7 @@
                 while($row = $result->fetch_assoc()) {
                     $message = array();
                     //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+                    $message['message_id'] = $row["message_id"];
                     $message['sender_user_id'] = $row["sender_user_id"];
                     $message['receiver_user_id'] = $row["receiver_user_id"];
                     $message['details'] = $row["details"];

@@ -10,13 +10,28 @@
     ob_flush();
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
+    $student_id = 0;
     $tutor_id = 0;
+    $start_time = "";
+    $end_time = "";
+    
+    if (isset($receive_json_obj["student_id"])) {
+        $student_id = $receive_json_obj["student_id"];
+    }
     
     if (isset($receive_json_obj["tutor_id"])) {
         $tutor_id = $receive_json_obj["tutor_id"];
     }
     
-    getAppointments($tutor_id);
+    if (isset($receive_json_obj["start_time"])) {
+        $start_time = $receive_json_obj["start_time"];
+    }
+    
+    if (isset($receive_json_obj["end_time"])) {
+        $end_time = $receive_json_obj["end_time"];
+    }
+    
+    setRequests($student_id, $tutor_id, $start_time, $end_time);
     
     flush();
     ob_start();
@@ -25,7 +40,7 @@
     
     
     
-    function getAppointments($tutor_id) {
+    function setRequests($student_id, $tutor_id, $start_time, $end_time) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();
@@ -46,7 +61,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
+            $sql =  "SELECT * FROM View_Request WHERE tutor_user_id = " . $tutor_id . ";";
             echo $sql;
             $result = $conn->query($sql);
             
@@ -61,12 +76,12 @@
                     $appointment['end_time'] = $row["end_time"];
                     $appointments[] = $appointment;
                 }
-                $return_json_arr['appointments'] = $appointments;
+                $return_json_arr['requests'] = $appointments;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no appointment records in the database. ';
+                $return_json_arr['details'] = 'There is no non-approved appointment records in the database. ';
                 $conn->close();
                 return false;
                 

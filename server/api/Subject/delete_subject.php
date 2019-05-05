@@ -64,13 +64,13 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_obj['code'] = 'DB_UPDATE_FAIL';
-                $return_json_obj['details'] = 'There is a databaser error when deleting to a subject record. ';
+                $return_json_obj['details'] = 'There is a database error when deleting to a subject record. ';
                 $conn->close();
                 return false;
                 
             }
             
-            $sql =  "SELECT * FROM Subject;";
+            $sql =  "SELECT * FROM View_Subject;";
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
