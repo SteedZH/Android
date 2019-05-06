@@ -10,13 +10,18 @@
     ob_flush();
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
-    $tutor_id = 0;
+    $appointment_id = 0;
+    $is_confirm = 0;
     
-    if (isset($receive_json_obj["tutor_id"])) {
-        $tutor_id = $receive_json_obj["tutor_id"];
+    if (isset($receive_json_obj["appointment_id"])) {
+        $appointment_id = $receive_json_obj["appointment_id"];
     }
     
-    getAppointments($tutor_id);
+    if (isset($receive_json_obj["is_confirm"])) {
+        $is_confirm = $receive_json_obj["is_confirm"];
+    }
+    
+    updateAppointmentApproval($appointment_id, $is_confirm);
     
     flush();
     ob_start();
@@ -25,18 +30,17 @@
     
     
     
-    function getAppointments($tutor_id) {
+    function updateAppointmentApproval($appointment_id, $is_confirm) {
         global $return_json_arr;
         $isValueValid = true;
-        $appointments = array();
         
         $return_json_arr['result'] = 'FAIL';
         
         try{
             // Check null
-            if ($tutor_id <= 0) {
-                $return_json_arr['code'] = 'NULL_TUTOR_ID';
-                $return_json_arr['details'] = 'A tutor Id must be specified. ';
+            if ($appointment_id <= 0) {
+                $return_json_arr['code'] = 'NULL_APPOINTMENT_ID';
+                $return_json_arr['details'] = 'An appointment Id must be specified. ';
                 return false;
             }
             
@@ -53,28 +57,19 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
-            echo $sql;
-            $result = $conn->query($sql);
+            $sql =  "UPDATE Appointment SET is_confirm = " . $is_confirm . " WHERE appointment_id = " . $appointment_id . ";";
             
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    $appointment = array();
-                    $appointment['appointment_id'] = $row["appointment_id"];
-                    $appointment['username'] = $row["username"];
-                    $appointment['first_name'] = $row["first_name"];
-                    $appointment['gender'] = $row["gender"];
-                    $appointment['start_time'] = $row["start_time"];
-                    $appointment['end_time'] = $row["end_time"];
-                    $appointments[] = $appointment;
-                }
-                $return_json_arr['appointments'] = $appointments;
+            if ($conn->query($sql) === TRUE) {
+                echo "Appointment records updated. ";
+                $return_json_arr['result'] = 'SUCCESS';
+                $return_json_arr['appointment_id'] = $appointment_id;
+                $return_json_arr['is_confirm'] = $is_confirm;
+                
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
-                $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no appointment records in the database. ';
+                $return_json_arr['code'] = 'DB_INSERT_FAIL';
+                $return_json_arr['details'] = 'There is a database error when updating an appointment record. ';
                 $conn->close();
                 return false;
                 

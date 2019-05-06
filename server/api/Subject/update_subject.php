@@ -36,7 +36,7 @@
         $isValueValid = true;
         
         $return_json_obj['result'] = 'FAIL';
-        $subjects = new array();
+        $subjects = array();
         
         try{
             // Check null
@@ -54,7 +54,6 @@
             // instantiate database connection
             $db = new Database();
             $conn = $db->getConnection();
-            
             
             // Check connection
             if ($conn->connect_error) {

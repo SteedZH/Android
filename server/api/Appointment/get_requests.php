@@ -33,6 +33,13 @@
         $return_json_arr['result'] = 'FAIL';
         
         try{
+            // Check null
+            if ($tutor_id <= 0) {
+                $return_json_arr['code'] = 'NULL_TUTOR_ID';
+                $return_json_arr['details'] = 'A tutor Id must be specified. ';
+                return false;
+            }
+            
             // instantiate database connection
             $db = new Database();
             $conn = $db->getConnection();
@@ -55,6 +62,7 @@
                 while($row = $result->fetch_assoc()) {
                     $appointment = array();
                     $appointment['appointment_id'] = $row["appointment_id"];
+                    $appointment['username'] = $row["username"];
                     $appointment['first_name'] = $row["first_name"];
                     $appointment['gender'] = $row["gender"];
                     $appointment['start_time'] = $row["start_time"];

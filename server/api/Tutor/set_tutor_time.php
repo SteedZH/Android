@@ -13,8 +13,8 @@
     
     $user_id = 0;
     $daytime = array();
-    //$weekday = 0;   //1 = Monday .. 7 = Sunday
-    //$time = 0;      //1 = AM, 2 = PM, 3 = Whole Day
+    //$weekday = 0;   //0 = Sunday .. 7 = Saturday
+    //$time = 0;      //1 = AM, 2 = PM, 0 = Whole Day
     
     if (isset($receive_json_obj["user_id"])) {
         $user_id = $receive_json_obj["user_id"];

@@ -6,157 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "REG_STUDENT",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "REG_STUDENT",
-						"value": "{\n\t\"username\":\"teststudent1\",\n\t\"firstname\":\"Registration Testing\",\n\t\"lastname\":\"Student\",\n\t\"gender\":\"F\",\n\t\"dob\":\"2000-01-01\",\n\t\"email\":\"testplayer1\",\n\t\"password\":\"123456aA\"\n}",
-						"type": "text",
-						"disabled": true
-					},
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Student\",\r\n\t\"gender\":\"F\",\r\n\t\"dob\":\"2000-01-01\",\r\n\t\"email\":\"teststudent1@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/registration/reg_student.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"registration",
-						"reg_student.php"
-					]
-				},
-				"description": "Register a Student Account"
-			},
-			"response": []
-		},
-		{
-			"name": "REG_TUTOR",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"username\":\"testtutor4\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Tutor\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor4@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":1,\r\n\t\"postcode\":\"SO17 1AB\",\r\n\t\"address\":\"Main Reception, Wessex Lane Hall, Wessex Lane, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/registration/reg_tutor.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"registration",
-						"reg_tutor.php"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "REG_ADMIN",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/registration/reg_admin.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"registration",
-						"reg_admin.php"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "LOGIN",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"password\":\"123456aA\"\r\n}"
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/authentication/login.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"authentication",
-						"login.php"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GET_SUBJECTS",
 			"request": {
 				"method": "GET",
@@ -200,7 +49,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"name\":\"My Subject Name 1\"\r\n}"
+					"raw": "{\r\n\t\"name\":\"Math\"\r\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Subject/set_subject.php",
@@ -298,6 +147,164 @@
 			"response": []
 		},
 		{
+			"name": "LOGIN",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"password\":\"123456aA\"\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Authentication/login.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Authentication",
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REG_STUDENT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "REG_STUDENT",
+						"value": "{\n\t\"username\":\"teststudent1\",\n\t\"firstname\":\"Registration Testing\",\n\t\"lastname\":\"Student\",\n\t\"gender\":\"F\",\n\t\"dob\":\"2000-01-01\",\n\t\"email\":\"testplayer1\",\n\t\"password\":\"123456aA\"\n}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Student\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"2000-01-01\",\r\n\t\"email\":\"teststudent1@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_student.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Registration",
+						"reg_student.php"
+					]
+				},
+				"description": "Register a Student Account"
+			},
+			"response": []
+		},
+		{
+			"name": "REG_TUTOR",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"testtutor1\",\r\n\t\"firstname\":\"Spicy Laura\",\r\n\t\"lastname\":\"White\",\r\n\t\"gender\":\"F\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor1@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":3,\r\n\t\"postcode\":\"SO18 2NU\",\r\n\t\"address\":\"Highfield Campus, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_tutor.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Registration",
+						"reg_tutor.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REG_ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"admin\",\r\n\t\"email\":\"admin@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_admin.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Registration",
+						"reg_admin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET_TUTORS",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -314,7 +321,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"tutorName\":\"Tutor\",\r\n\t\"tutorSubject\":2,\r\n\t\"tutorLocation\":\"SO17\"\r\n}"
+					"raw": "{\r\n\t\"tutorName\":\"\",\r\n\t\"tutorSubject\":2,\r\n\t\"tutorLocation\":\"\"\r\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/get_tutors.php",
@@ -354,7 +361,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"tutor_id\":6\n}"
+					"raw": "{\n\t\"tutor_id\":3\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/get_tutor_details.php",
@@ -431,7 +438,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"user_id\":26,\r\n\t\"is_approved\":1\r\n}"
+					"raw": "{\r\n\t\"user_id\":3,\r\n\t\"is_approved\":1\r\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/update_tutor_approvals.php",
@@ -455,6 +462,86 @@
 			"response": []
 		},
 		{
+			"name": "GET_CHATS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sender_user_id\":2\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chats.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Message",
+						"get_chats.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_CHAT_MESSAGES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sender_user_id\":5,\r\n\t\"receiver_user_id\":2\r\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chat_messages.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Message",
+						"get_chat_messages.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "SET_MESSAGE",
 			"request": {
 				"method": "POST",
@@ -468,7 +555,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"sender_user_id\":26,\r\n\t\"receiver_user_id\":27,\r\n\t\"details\":\"Well... I think you should practice on your own, dont waste my time so bye \"\r\n}"
+					"raw": "{\r\n\t\"sender_user_id\":2,\r\n\t\"receiver_user_id\":5,\r\n\t\"details\":\"Well, I think you should play yourself, what a poor student asking for special services with 50 pounds only...\"\r\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/set_message.php",
@@ -492,86 +579,6 @@
 			"response": []
 		},
 		{
-			"name": "GET_CHAT_MESSAGES",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"sender_user_id\":27,\r\n\t\"receiver_user_id\":26\r\n}"
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chat_messages.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"Message",
-						"get_chat_messages.php"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET_CHATS",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"sender_user_id\":27,\r\n\t\"receiver_user_id\":26\r\n}"
-				},
-				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chat_messages.php",
-					"protocol": "http",
-					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
-					],
-					"path": [
-						"COMP6239",
-						"server",
-						"api",
-						"Message",
-						"get_chat_messages.php"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "SET_TUTOR_TIME",
 			"request": {
 				"method": "POST",
@@ -585,7 +592,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"user_id\":26,\n\t\"daytime\":[\n\t\t{\"weekday\":1,\"time\":3},\n\t\t{\"weekday\":2,\"time\":2},\n\t\t{\"weekday\":7,\"time\":1}\n\t\t]\n}"
+					"raw": "{\n\t\"user_id\":2,\n\t\"daytime\":[\n\t\t{\"weekday\":1,\"time\":3},\n\t\t{\"weekday\":2,\"time\":2},\n\t\t{\"weekday\":7,\"time\":1}\n\t\t]\n}"
 				},
 				"url": {
 					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/set_tutor_time.php",
@@ -603,6 +610,160 @@
 						"api",
 						"Tutor",
 						"set_tutor_time.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_APPOINTMENTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tutor_id\":8\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/get_appointments.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Appointment",
+						"get_appointments.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_REQUESTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tutor_id\":8\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/get_requests.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Appointment",
+						"get_requests.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SET_APPOINTMENT_REQUEST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"student_id\":3,\n\t\"tutor_id\":8,\n\t\"start_time\":\"2019-08-01 00:01:00\",\n\t\"end_time\":\"2019-08-01 00:02:00\"\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/set_appointment_request.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Appointment",
+						"set_appointment_request.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE_APPOINTMENT_APPROVAL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"appointment_id\":3,\n\t\"is_confirm\":1\n}"
+				},
+				"url": {
+					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/update_appointment_approval.php",
+					"protocol": "http",
+					"host": [
+						"ec2-35-177-19-117",
+						"eu-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"COMP6239",
+						"server",
+						"api",
+						"Appointment",
+						"update_appointment_approval.php"
 					]
 				}
 			},
