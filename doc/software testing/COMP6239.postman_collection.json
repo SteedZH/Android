@@ -15,14 +15,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Subject/get_subjects.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Subject/get_subjects.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35",
+						"178",
+						"209",
+						"191"
 					],
 					"path": [
 						"COMP6239",
@@ -52,14 +51,10 @@
 					"raw": "{\r\n\t\"name\":\"Math\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Subject/set_subject.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Subject/set_subject.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -89,14 +84,10 @@
 					"raw": "{\r\n\t\"subject_id\":1\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Subject/delete_subject.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Subject/delete_subject.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -126,14 +117,10 @@
 					"raw": "{\r\n\t\"subject_id\":2,\r\n\t\"name\":\"New Subject Name 2\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Subject/update_subject.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Subject/update_subject.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -166,14 +153,10 @@
 					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"password\":\"123456aA\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Authentication/login.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Authentication/login.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -209,14 +192,10 @@
 					"raw": "{\r\n\t\"username\":\"teststudent1\",\r\n\t\"firstname\":\"Registration Testing\",\r\n\t\"lastname\":\"Student\",\r\n\t\"gender\":\"M\",\r\n\t\"dob\":\"2000-01-01\",\r\n\t\"email\":\"teststudent1@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_student.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Registration/reg_student.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -247,14 +226,10 @@
 					"raw": "{\r\n\t\"username\":\"testtutor1\",\r\n\t\"firstname\":\"Spicy Laura\",\r\n\t\"lastname\":\"White\",\r\n\t\"gender\":\"F\",\r\n\t\"dob\":\"1990-01-01\",\r\n\t\"email\":\"testtutor1@email.com\",\r\n\t\"password\":\"123456aA\",\r\n\t\"subject_id\":3,\r\n\t\"postcode\":\"SO18 2NU\",\r\n\t\"address\":\"Highfield Campus, Southampton, Hampshire\",\r\n\t\"educations\":\"BEng in Vocational Tatoo\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_tutor.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Registration/reg_tutor.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -284,14 +259,10 @@
 					"raw": "{\r\n\t\"username\":\"admin\",\r\n\t\"email\":\"admin@email.com\",\r\n\t\"password\":\"123456aA\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Registration/reg_admin.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Registration/reg_admin.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -324,14 +295,10 @@
 					"raw": "{\r\n\t\"tutorName\":\"\",\r\n\t\"tutorSubject\":2,\r\n\t\"tutorLocation\":\"\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/get_tutors.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Tutor/get_tutors.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -364,14 +331,10 @@
 					"raw": "{\n\t\"tutor_id\":3\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/get_tutor_details.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Tutor/get_tutor_details.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -404,14 +367,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/get_tutor_requests.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Tutor/get_tutor_requests.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -441,14 +400,10 @@
 					"raw": "{\r\n\t\"user_id\":3,\r\n\t\"is_approved\":1\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/update_tutor_approvals.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Tutor/update_tutor_approvals.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -481,14 +436,10 @@
 					"raw": "{\r\n\t\"sender_user_id\":2\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chats.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Message/get_chats.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -521,14 +472,10 @@
 					"raw": "{\r\n\t\"sender_user_id\":5,\r\n\t\"receiver_user_id\":2\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/get_chat_messages.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Message/get_chat_messages.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -558,14 +505,10 @@
 					"raw": "{\r\n\t\"sender_user_id\":2,\r\n\t\"receiver_user_id\":5,\r\n\t\"details\":\"Well, I think you should play yourself, what a poor student asking for special services with 50 pounds only...\"\r\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Message/set_message.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Message/set_message.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -595,14 +538,10 @@
 					"raw": "{\n\t\"user_id\":2,\n\t\"daytime\":[\n\t\t{\"weekday\":1,\"time\":3},\n\t\t{\"weekday\":2,\"time\":2},\n\t\t{\"weekday\":7,\"time\":1}\n\t\t]\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Tutor/set_tutor_time.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Tutor/set_tutor_time.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -635,14 +574,10 @@
 					"raw": "{\n\t\"tutor_id\":8\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/get_appointments.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Appointment/get_appointments.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -675,14 +610,10 @@
 					"raw": "{\n\t\"tutor_id\":8\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/get_requests.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Appointment/get_requests.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -712,14 +643,10 @@
 					"raw": "{\n\t\"student_id\":3,\n\t\"tutor_id\":8,\n\t\"start_time\":\"2019-08-01 00:01:00\",\n\t\"end_time\":\"2019-08-01 00:02:00\"\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/set_appointment_request.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Appointment/set_appointment_request.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
@@ -749,14 +676,10 @@
 					"raw": "{\n\t\"appointment_id\":3,\n\t\"is_confirm\":1\n}"
 				},
 				"url": {
-					"raw": "http://ec2-35-177-19-117.eu-west-2.compute.amazonaws.com/COMP6239/server/api/Appointment/update_appointment_approval.php",
+					"raw": "http://35.178.209.191/COMP6239/server/api/Appointment/update_appointment_approval.php",
 					"protocol": "http",
 					"host": [
-						"ec2-35-177-19-117",
-						"eu-west-2",
-						"compute",
-						"amazonaws",
-						"com"
+						"35","178","209","191"
 					],
 					"path": [
 						"COMP6239",
