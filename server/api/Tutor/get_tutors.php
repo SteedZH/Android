@@ -65,7 +65,7 @@
             $name_cause = ($tutor_name === "%") ? "first_name LIKE '%'" : "(first_name LIKE '%" . $tutor_name . "%' OR last_name LIKE '%" . $tutor_name . "%')";
             
             $sql =  "SELECT DISTINCT user_id, first_name, username, postcode,subject_id FROM View_Tutor WHERE is_approved > 0 AND " . $subject_cause . " AND " . $location_cause . " AND " . $name_cause . ";";
-            echo $sql;
+            //echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
