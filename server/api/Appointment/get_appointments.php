@@ -54,7 +54,7 @@
             }
             
             $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
-            echo $sql;
+            //echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
