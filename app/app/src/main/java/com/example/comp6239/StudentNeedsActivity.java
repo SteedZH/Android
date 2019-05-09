@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.example.comp6239.utility.ListAdapter2;
-import com.example.comp6239.utility.ListViewData;
+import com.example.comp6239.listview_tutor.ListAdapter2;
+import com.example.comp6239.listview_tutor.ListViewData;
 
 import java.util.ArrayList;
 import java.util.List;

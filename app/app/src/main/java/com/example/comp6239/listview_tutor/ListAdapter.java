@@ -1,4 +1,4 @@
-package com.example.comp6239.utility;
+package com.example.comp6239.listview_tutor;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,9 +23,11 @@ public class ListAdapter extends ArrayAdapter {
         ListViewData listView = (ListViewData) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         TextView dataName = view.findViewById(R.id.list_student);
-        TextView dataTime = view.findViewById(R.id.list_time);
+        TextView startTime = view.findViewById(R.id.start_time);
+        TextView endTime = view.findViewById(R.id.end_time);
         dataName.setText(listView.getList_name());
-        dataTime.setText(listView.getList_time());
+        startTime.setText(listView.getStart_time());
+        endTime.setText(listView.getEnd_time());
         return view;
     }
 }

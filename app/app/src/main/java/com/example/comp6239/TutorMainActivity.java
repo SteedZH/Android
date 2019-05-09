@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.comp6239.utility.ListAdapter;
-import com.example.comp6239.utility.ListViewData;
+import com.example.comp6239.listview_tutor.ListAdapter;
+import com.example.comp6239.listview_tutor.ListViewData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +32,13 @@ public class TutorMainActivity extends AppCompatActivity {
             }
         });
         initData();
-        ListAdapter adapter=new ListAdapter(TutorMainActivity.this, R.layout.listview_tutor_mian,data_list);
+        ListAdapter adapter=new ListAdapter(TutorMainActivity.this, R.layout.listview_tutor_main,data_list);
         ListView listView=findViewById(R.id.tutor_main_list_view);
         listView.setAdapter(adapter);
     }
 
     private void initData(){
-        data_list.add(new ListViewData("student1","13:00-14:00"));
+        data_list.add(new ListViewData("student1","2019-08-01 00:00:00","2019-08-01 00:01:00"));
+        data_list.add(new ListViewData("student2","2019-08-02 00:00:00","2019-08-02 00:01:00"));
     }
 }
