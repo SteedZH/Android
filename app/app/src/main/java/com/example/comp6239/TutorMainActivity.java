@@ -10,6 +10,10 @@ import android.widget.ListView;
 import com.example.comp6239.listview_tutor.ListAdapter;
 import com.example.comp6239.listview_tutor.ListViewData;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +42,21 @@ public class TutorMainActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        data_list.add(new ListViewData("student1","2019-08-01 00:00:00","2019-08-01 00:01:00"));
-        data_list.add(new ListViewData("student2","2019-08-02 00:00:00","2019-08-02 00:01:00"));
+        int id = AppUser.getUserId();
+        String string = GetDataFromPHP.getAppointment(8);
+
+        JSONObject jsonObject;
+        JSONArray jsonArray = null;
+        JSONObject info;
+        try {
+            jsonObject = new JSONObject(string);
+            jsonArray = jsonObject.getJSONArray("appointments");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                info = jsonArray.getJSONObject(i);
+                data_list.add(new ListViewData(info.getString("first_name"),info.getString("start_time"),info.getString("end_time")));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

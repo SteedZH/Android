@@ -77,7 +77,7 @@ public class TestConnectionActivity extends Activity implements View.OnClickList
             public void run() {
                 try {
                     isStartRecieveMsg = true;
-                    mSocket = new Socket("35.177.19.117", 9999);
+                    mSocket = new Socket("35.178.209.191", 9999);
                     System.out.println("successfully connect");
 
                     mWriter = new DataOutputStream(mSocket.getOutputStream());
