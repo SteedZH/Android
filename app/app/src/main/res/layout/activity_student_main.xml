@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Tutor Name" />
+            android:hint="Tutor Name" />
 
         <Button
             android:id="@+id/search_button"
@@ -42,6 +42,7 @@
         android:layout_above="@+id/student_main_bottom">
 
         <ListView
+            android:id="@+id/list_view_show_tutor"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -5,40 +5,38 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-import com.example.comp6239.listview_tutor.ListAdapter2;
-import com.example.comp6239.listview_tutor.ListViewData;
+import com.example.comp6239.listview.NeedsGridAdapter;
+import com.example.comp6239.listview.TutorListAdapter;
+import com.example.comp6239.listview.ListViewData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentNeedsActivity extends AppCompatActivity {
 
+    private BaseAdapter adapter = null;
     private List<ListViewData> data_list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_needs);
-//        Button bt_needs_back = findViewById(R.id.needs_back);
-//        bt_needs_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(StudentNeedsActivity.this,StudentMainActivity.class);
-//                startActivity(intent);
-//                StudentNeedsActivity.this.finish();
-//            }
-//        });
+
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
         initData();
-        ListAdapter2 adapter=new ListAdapter2(StudentNeedsActivity.this, R.layout.listview_student_needs,data_list);
-        GridView gridView=findViewById(R.id.student_needs_grid_view);
-        gridView.setAdapter(adapter);
+//        NeedsGridAdapter adapter=new NeedsGridAdapter(StudentNeedsActivity.this, R.layout.gridview_student_needs,data_list);
+
+//        adapter = new
+//
+//        GridView gridView=findViewById(R.id.student_needs_grid_view);
+//
+//        gridView.setAdapter(adapter);
 
     }
 

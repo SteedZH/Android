@@ -1,4 +1,4 @@
-package com.example.comp6239;
+package com.example.comp6239.utility;
 
 public class AppConfigs {
 

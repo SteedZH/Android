@@ -1,4 +1,4 @@
-package com.example.comp6239;
+package com.example.comp6239.utility;
 
 import android.os.AsyncTask;
 
@@ -59,7 +59,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         super.onPostExecute(s);
     }
 
-    public static String getTutor(String tutorName, String tutorSubject, String tutorLocation){
+    public static String getTutor(String tutorName, int tutorSubject, String tutorLocation){
         String string = "";
         GetDataFromPHP getTutors = new GetDataFromPHP();
         String params = "{\"tutorName\":\""+tutorName+"\",\"tutorSubject\":"+tutorSubject+",\"tutorLocation\":\""+tutorLocation+"\"}";
@@ -88,5 +88,18 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         return string;
     }
 
+    public static String getTutorDetails(int tutorId) {
+        String string = "";
+        GetDataFromPHP getTutorDetails = new GetDataFromPHP();
+        String params = "{\"tutor_id\":"+tutorId+"}";
+        try {
+            string = getTutorDetails.execute("http://35.178.209.191/COMP6239/server/api/Tutor/get_tutor_details.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
 }
 

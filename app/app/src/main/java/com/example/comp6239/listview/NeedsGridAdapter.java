@@ -1,4 +1,4 @@
-package com.example.comp6239.listview_tutor;
+package com.example.comp6239.listview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,23 +11,20 @@ import com.example.comp6239.R;
 
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter {
+public class NeedsGridAdapter extends ArrayAdapter {
     private final int resourceId;
 
-    public ListAdapter(Context context, int textViewResourceId, List<ListViewData> objects){
+    public NeedsGridAdapter(Context context, int textViewResourceId, List<ListViewData> objects){
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ListViewData listView = (ListViewData) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        TextView dataName = view.findViewById(R.id.list_student);
-        TextView startTime = view.findViewById(R.id.start_time);
-        TextView endTime = view.findViewById(R.id.end_time);
-        dataName.setText(listView.getList_name());
-        startTime.setText(listView.getStart_time());
-        endTime.setText(listView.getEnd_time());
+        TextView text =view.findViewById(R.id.text);
+        text.setText(listView.getArg1());
         return view;
     }
 }

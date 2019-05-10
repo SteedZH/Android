@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.comp6239.listview_tutor.ListAdapter;
-import com.example.comp6239.listview_tutor.ListViewData;
+import com.example.comp6239.listview.AppointmentListAdapter;
+import com.example.comp6239.listview.ListViewData;
+import com.example.comp6239.utility.AppUser;
+import com.example.comp6239.utility.GetDataFromPHP;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +38,8 @@ public class TutorMainActivity extends AppCompatActivity {
             }
         });
         initData();
-        ListAdapter adapter=new ListAdapter(TutorMainActivity.this, R.layout.listview_tutor_main,data_list);
-        ListView listView=findViewById(R.id.tutor_main_list_view);
+        final AppointmentListAdapter adapter=new AppointmentListAdapter(TutorMainActivity.this, R.layout.listview_tutor_main,data_list);
+        final ListView listView=findViewById(R.id.tutor_main_list_view);
         listView.setAdapter(adapter);
     }
 
@@ -46,7 +48,7 @@ public class TutorMainActivity extends AppCompatActivity {
         String string = GetDataFromPHP.getAppointment(8);
 
         JSONObject jsonObject;
-        JSONArray jsonArray = null;
+        JSONArray jsonArray;
         JSONObject info;
         try {
             jsonObject = new JSONObject(string);
