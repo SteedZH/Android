@@ -30,8 +30,10 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
                     httpURLConnection.getOutputStream());
 
 
-            out.writeBytes(strings[1]);
-            out.flush();
+            if (strings[1]!= "") {
+                out.writeBytes(strings[1]);
+                out.flush();
+            }
             out.close();
 
             InputStream inputStream = httpURLConnection.getInputStream();
@@ -100,6 +102,21 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         return string;
+    }
+
+    public static String getSubjects(){
+        String string = "";
+        GetDataFromPHP getSubjects = new GetDataFromPHP();
+        String params = "";
+        try {
+            string = getSubjects.execute("http://35.178.209.191/COMP6239/server/api/Subject/get_subjects.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+
     }
 }
 
