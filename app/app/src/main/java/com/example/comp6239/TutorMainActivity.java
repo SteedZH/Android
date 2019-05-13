@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.comp6239.listview.AppointmentListAdapter;
-import com.example.comp6239.listview.ListViewData;
+import com.example.comp6239.adapter.AppointmentListAdapter;
+import com.example.comp6239.adapter.ListViewData;
 import com.example.comp6239.utility.AppUser;
 import com.example.comp6239.utility.GetDataFromPHP;
 

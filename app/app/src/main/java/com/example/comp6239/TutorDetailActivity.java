@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.example.comp6239.listview.ListViewData;
-import com.example.comp6239.listview.TutorDetailsAdapter;
+import com.example.comp6239.adapter.ListViewData;
+import com.example.comp6239.adapter.TutorDetailsAdapter;
 import com.example.comp6239.utility.GetDataFromPHP;
 
 import org.json.JSONException;

@@ -60,7 +60,7 @@
             $sql =  "UPDATE Appointment SET is_confirm = " . $is_confirm . " WHERE appointment_id = " . $appointment_id . ";";
             
             if ($conn->query($sql) === TRUE) {
-                echo "Appointment records updated. ";
+                //echo "Appointment records updated. ";
                 $return_json_arr['result'] = 'SUCCESS';
                 $return_json_arr['appointment_id'] = $appointment_id;
                 $return_json_arr['is_confirm'] = $is_confirm;

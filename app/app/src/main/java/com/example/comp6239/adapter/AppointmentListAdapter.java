@@ -1,4 +1,4 @@
-package com.example.comp6239.listview;
+package com.example.comp6239.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

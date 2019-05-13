@@ -1,6 +1,4 @@
-package com.example.comp6239.listview;
-
-import android.widget.ListView;
+package com.example.comp6239.adapter;
 
 public class ListViewData {
     private String arg1;

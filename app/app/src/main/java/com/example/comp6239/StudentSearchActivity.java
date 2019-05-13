@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,9 +17,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.comp6239.listview.ListViewData;
-import com.example.comp6239.listview.SearchAdapter;
-import com.example.comp6239.listview.TutorListAdapter;
+import com.example.comp6239.adapter.ListViewData;
+import com.example.comp6239.adapter.SearchAdapter;
 import com.example.comp6239.utility.GetDataFromPHP;
 
 import org.json.JSONArray;

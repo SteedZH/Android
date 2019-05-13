@@ -118,5 +118,19 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         return string;
 
     }
+
+    public static String getRequests(int tutorId){
+        String string = "";
+        GetDataFromPHP getRequests = new GetDataFromPHP();
+        String params = "{\"tutor_id\":"+tutorId+"}";
+        try {
+            string = getRequests.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_requests.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
 }
 
