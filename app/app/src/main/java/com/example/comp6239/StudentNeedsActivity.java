@@ -19,13 +19,18 @@ public class StudentNeedsActivity extends AppCompatActivity {
     private List<Map<String, Object>> dataList;
     private SimpleAdapter adapter = null;
 
-    private int[] icons = {R.mipmap.picture1,
+    private int[] icons = {
+            R.mipmap.picture0,
+            R.mipmap.picture1,
             R.mipmap.picture2,
             R.mipmap.picture3,
             R.mipmap.picture4,
             R.mipmap.picture5,
-            R.mipmap.picture6};
-    private String[] text = {"Computer", "Math", "Chemistry", "Biology", "Physics", "History"};
+            R.mipmap.picture6,
+            R.mipmap.picture7,
+            R.mipmap.picture8
+    };
+    private String[] text = {"All", "Computer", "Math", "Chemistry", "Biology", "Physics", "History","Music", "Law"};
 
     @Override
 
