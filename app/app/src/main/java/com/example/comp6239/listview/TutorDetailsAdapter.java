@@ -18,6 +18,7 @@ public class TutorDetailsAdapter extends ArrayAdapter {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ListViewData listView = (ListViewData) getItem(position);

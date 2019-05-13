@@ -5,8 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
@@ -19,7 +17,7 @@ public class StudentProfileActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent = new Intent();
-//                intent.setClass(StudentProfileActivity.this,StudentMainActivity.class);
+//                intent.setClass(StudentProfileActivity.this,StudentSearchActivity.class);
 //                startActivity(intent);
 //                StudentProfileActivity.this.finish();
 //            }
@@ -35,7 +33,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                Intent homeIntent = new Intent(this, StudentMainActivity.class);
+                Intent homeIntent = new Intent(this, StudentSearchActivity.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
                 finish();

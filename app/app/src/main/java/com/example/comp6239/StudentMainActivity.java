@@ -1,88 +1,106 @@
 package com.example.comp6239;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.example.comp6239.listview.ListViewData;
-import com.example.comp6239.listview.TutorListAdapter;
-import com.example.comp6239.utility.GetDataFromPHP;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentMainActivity extends AppCompatActivity {
 
-    private List<ListViewData> dataList = new ArrayList<>();
+    private GridView gridView;
+    private List<Map<String, Object>> dataList;
+    private SimpleAdapter adapter = null;
+
+    private int[] icons = {
+            R.mipmap.picture0,
+            R.mipmap.picture1,
+            R.mipmap.picture2,
+            R.mipmap.picture3,
+            R.mipmap.picture4,
+            R.mipmap.picture5,
+            R.mipmap.picture6,
+            R.mipmap.picture7,
+            R.mipmap.picture8
+    };
+    private String[] text = {"All", "Math", "Computer", "Physics", "Chemistry", "Biology", "History", "Music", "Law"};
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-        Button bt_needs = findViewById(R.id.needs);
+        setContentView(R.layout.activity_student_needs);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+
+
+        Button bt_needs = findViewById(R.id.needs_confirm);
         bt_needs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(StudentMainActivity.this,StudentNeedsActivity.class);
-                startActivity(intent);
-                StudentMainActivity.this.finish();
-            }
-        });
-        Button bt_profile= findViewById(R.id.profile);
-        bt_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(StudentMainActivity.this,StudentProfileActivity.class);
+                intent.setClass(StudentMainActivity.this, StudentSearchActivity.class);
                 startActivity(intent);
                 StudentMainActivity.this.finish();
             }
         });
 
-
+        gridView = findViewById(R.id.student_needs_grid_view);
+        dataList = new ArrayList<>();
         initData();
-        final TutorListAdapter tutorListAdapter = new TutorListAdapter(StudentMainActivity.this, R.layout.listview_student_main, dataList);
-        final ListView listView = findViewById(R.id.list_view_show_tutor);
-        listView.setAdapter(tutorListAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        String[] form = {"image", "text"};
+        int[] to = {R.id.subject_image, R.id.subject_text};
+        adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, form, to);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = view.findViewById(R.id.tutor_id);
-                String tutor_id = textView.getText().toString();
-//                Toast.makeText(getApplicationContext(),"get context "+tutor_id+" ok" ,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), TutorDetailActivity.class);
-                intent.putExtra("tutor_id",tutor_id);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(StudentMainActivity.this, "你点击了第" + i, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), StudentSearchActivity.class);
+                intent.putExtra("subject_id",i);
+
                 startActivity(intent);
             }
         });
     }
-        private void initData(){
-            String string = GetDataFromPHP.getTutor("",0,"");
 
-            JSONObject jsonObject;
-            JSONArray jsonArray;
-            JSONObject info;
-            try {
-                jsonObject = new JSONObject(string);
-                jsonArray = jsonObject.getJSONArray("tutors");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    info = jsonArray.getJSONObject(i);
-                    dataList.add(new ListViewData(info.getString("user_id"),info.getString("first_name"),info.getString("postcode")));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                Intent homeIntent = new Intent(this, StudentSearchActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                finish();
+                return true;
         }
+        return (super.onOptionsItemSelected(menuItem));
+    }
 
 
+    private List<Map<String, Object>> initData() {
+        for (int i = 0; i < icons.length; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("image", icons[i]);
+            map.put("text", text[i]);
+            dataList.add(map);
+        }
+        return dataList;
+    }
 }
