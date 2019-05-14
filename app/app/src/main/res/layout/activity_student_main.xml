@@ -25,10 +25,10 @@
        android:numColumns="3"/>
 
     <Button
-        android:id="@+id/needs_confirm"
+        android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Confirm" />
+        android:text="Profile" />
 
 </RelativeLayout>

@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,20 +39,21 @@ public class StudentMainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_needs);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        setContentView(R.layout.activity_student_main);
+//        ActionBar actionBar = getSupportActionBar();
+//        assert actionBar != null;
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setHomeButtonEnabled(true);
 
 
 
-        Button bt_needs = findViewById(R.id.needs_confirm);
-        bt_needs.setOnClickListener(new View.OnClickListener() {
+        //To profile Activity
+        Button bt_profile= findViewById(R.id.profile);
+        bt_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(StudentMainActivity.this, StudentSearchActivity.class);
+                intent.setClass(StudentMainActivity.this,StudentProfileActivity.class);
                 startActivity(intent);
                 StudentMainActivity.this.finish();
             }
@@ -80,18 +80,18 @@ public class StudentMainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case android.R.id.home:
-                Intent homeIntent = new Intent(this, StudentSearchActivity.class);
-                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
-                finish();
-                return true;
-        }
-        return (super.onOptionsItemSelected(menuItem));
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem menuItem) {
+//        switch (menuItem.getItemId()) {
+//            case android.R.id.home:
+//                Intent homeIntent = new Intent(this, StudentSearchActivity.class);
+//                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(homeIntent);
+//                finish();
+//                return true;
+//        }
+//        return (super.onOptionsItemSelected(menuItem));
+//    }
 
 
     private List<Map<String, Object>> initData() {

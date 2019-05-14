@@ -35,5 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tutor_main_list_view"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
         />
 </LinearLayout>

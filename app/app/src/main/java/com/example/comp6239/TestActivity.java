@@ -59,7 +59,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(TestActivity.this, TestConnectionActivity.class);
+                intent.setClass(TestActivity.this, StudentChatActivity.class);
                 startActivity(intent);
                 TestActivity.this.finish();
             }

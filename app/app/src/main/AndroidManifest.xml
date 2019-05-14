@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TutorDetailActivity"></activity>
-        <activity android:name=".TestConnectionActivity" />
+        <activity android:name=".TutorDetailActivity" />
+        <activity android:name=".StudentChatActivity" />
+        <activity android:name=".TutorChatActivity" />
         <activity android:name=".AdminAproveTutorActiviry" />
         <activity android:name=".TestActivity">
             <intent-filter>
@@ -30,8 +31,9 @@
         <activity android:name=".TutorMainActivity" />
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".StudentMainActivity" />
-        <activity android:name=".StudentSearchActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".StudentSearchActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".AdminMainActivity"
             android:label="@string/title_admin_portal">

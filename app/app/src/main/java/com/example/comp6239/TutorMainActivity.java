@@ -22,6 +22,7 @@ import java.util.List;
 public class TutorMainActivity extends AppCompatActivity {
 
     private List<ListViewData> data_list = new ArrayList<>();
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class TutorMainActivity extends AppCompatActivity {
                 TutorMainActivity.this.finish();
             }
         });
+        id = AppUser.getUserId();
+        id = 11;
         initData();
         final AppointmentListAdapter adapter=new AppointmentListAdapter(TutorMainActivity.this, R.layout.listview_tutor_main,data_list);
         final ListView listView=findViewById(R.id.tutor_main_list_view);
@@ -44,8 +47,8 @@ public class TutorMainActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        int id = AppUser.getUserId();
-        String string = GetDataFromPHP.getAppointment(8);
+
+        String string = GetDataFromPHP.getAppointment(id);
 
         JSONObject jsonObject;
         JSONArray jsonArray;

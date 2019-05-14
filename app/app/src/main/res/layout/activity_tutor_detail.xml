@@ -6,17 +6,51 @@
         android:id="@+id/tutor_details_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/to_chat"
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/time_slot_from"
         >
 
     </ListView>
 
-    <Button
-        android:id="@+id/to_chat"
+    <EditText
+        android:id="@+id/time_slot_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:hint="StartTime: 2019-01-01 00:00:00"
+        android:layout_above="@+id/time_slot_to" />
+
+    <EditText
+        android:id="@+id/time_slot_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:hint="EndTime: 2019-01-01 00:01:00"
+        android:layout_above="@+id/button_group"/>
+
+    <LinearLayout
+        android:id="@+id/button_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="CHAT" />
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="5dp">
+
+        <Button
+            android:id="@+id/to_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CHAT"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/to_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 </RelativeLayout>

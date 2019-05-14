@@ -1,6 +1,7 @@
 package com.example.comp6239.utility;
 
 import android.os.AsyncTask;
+import android.widget.SearchView;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -130,6 +131,36 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return string;
+    }
+
+    public static String setAppointmentRequest(int studentId, int tutorId, String startTime, String endTime) {
+        String string = "";
+        GetDataFromPHP getTutors = new GetDataFromPHP();
+        String params = "{\"student_id\":"+studentId+",\"tutor_id\":"+tutorId+",\"start_time\":\""+startTime+"\",\"end_time\":\""+endTime+"\"}";
+        try {
+            string=getTutors.execute("http://35.178.209.191/COMP6239/server/api/Appointment/set_appointment_request.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return string;
+    }
+
+    public static String getChatMessage(int senderId, int receiverId) {
+        String string = "";
+        GetDataFromPHP getTutors = new GetDataFromPHP();
+        String params = "{\"sender_user_id\":"+senderId+",\"receiver_user_id\":"+receiverId+"}";
+        try {
+            string=getTutors.execute("http://35.178.209.191/COMP6239/server/api/Message/get_chat_messages.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return string;
     }
 }

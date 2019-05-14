@@ -81,17 +81,7 @@ public class StudentSearchActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        //To profile Activity
-        Button bt_profile= findViewById(R.id.profile);
-        bt_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(StudentSearchActivity.this,StudentProfileActivity.class);
-                startActivity(intent);
-                StudentSearchActivity.this.finish();
-            }
-        });
+
 
         //Get subject ID
         int subject_id ;
