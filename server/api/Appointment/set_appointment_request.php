@@ -135,7 +135,7 @@
             $sql =  "INSERT INTO Appointment (tutor_user_id, student_user_id, start_time, end_time, is_confirm) VALUES (" . $tutor_id . ", " . $student_id . ", '" . $start_time . "', '" . $end_time . "', 0);";
             
             if ($conn->query($sql) === TRUE) {
-                echo "New records created. ";
+                //echo "New records created. ";
                 $return_json_arr['result'] = 'SUCCESS';
                 $return_json_arr['student_id'] = $student_id;
                 $return_json_arr['tutor_id'] = $tutor_id;
