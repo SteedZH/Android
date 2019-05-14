@@ -62,6 +62,7 @@
                 while($row = $result->fetch_assoc()) {
                     $appointment = array();
                     $appointment['appointment_id'] = $row["appointment_id"];
+                    $appointment['student_user_id'] = $row["student_user_id"];
                     $appointment['username'] = $row["username"];
                     $appointment['first_name'] = $row["first_name"];
                     $appointment['gender'] = $row["gender"];
