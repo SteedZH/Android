@@ -53,7 +53,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Appointment WHERE appointment_id = " . $appointment_id . ";";
+            $sql =  "SELECT * FROM View_Request WHERE appointment_id = " . $appointment_id . ";";
             //echo $sql;
             $result = $conn->query($sql);
             
