@@ -34,7 +34,7 @@
         
         try{
             // Check null
-            if ($tutor_id <= 0) {
+            if ($appointment_id <= 0) {
                 $return_json_arr['code'] = 'NULL_TUTOR_ID';
                 $return_json_arr['details'] = 'A tutor Id must be specified. ';
                 return false;
