@@ -67,6 +67,7 @@
                     $return_json_arr['first_name'] = $row["first_name"];
                     $return_json_arr['last_name'] = $row["last_name"];
                     $return_json_arr['gender'] = $row["gender"];
+                    $return_json_arr['dob'] = $row["dob"];
                     $return_json_arr['start_time'] = $row["start_time"];
                     $return_json_arr['end_time'] = $row["end_time"];
                 }
