@@ -60,17 +60,15 @@
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    $appointment = array();
-                    $appointment['appointment_id'] = $row["appointment_id"];
-                    $appointment['student_user_id'] = $row["student_user_id"];
-                    $appointment['username'] = $row["username"];
-                    $appointment['first_name'] = $row["first_name"];
-                    $appointment['gender'] = $row["gender"];
-                    $appointment['start_time'] = $row["start_time"];
-                    $appointment['end_time'] = $row["end_time"];
-                    $appointments[] = $appointment;
+                    //$appointment = array();
+                    $return_json_arr['appointment_id'] = $row["appointment_id"];
+                    $return_json_arr['student_user_id'] = $row["student_user_id"];
+                    $return_json_arr['username'] = $row["username"];
+                    $return_json_arr['first_name'] = $row["first_name"];
+                    $return_json_arr['gender'] = $row["gender"];
+                    $return_json_arr['start_time'] = $row["start_time"];
+                    $return_json_arr['end_time'] = $row["end_time"];
                 }
-                $return_json_arr['appointments'] = $appointments;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
