@@ -28,7 +28,7 @@
             android:id="@+id/tutor_main_unread"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Unread" />
+            android:text="Request" />
     </LinearLayout>
 
     <ListView

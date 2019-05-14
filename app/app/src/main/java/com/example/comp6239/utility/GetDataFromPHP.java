@@ -164,12 +164,26 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         return string;
     }
 
-    public static String getOneAppointment(int appointmentId){
+    public static String getRequestDetails(int appointmentId){
         String string = "";
         GetDataFromPHP getAppointment = new GetDataFromPHP();
         String params = "{\"appointment_id\":"+appointmentId+"}";
         try {
-            string = getAppointment.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_appointment.php", params).get();
+            string = getAppointment.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_request_details.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
+    public static String approveAppointment(int appointment_id) {
+        String string = "";
+        GetDataFromPHP approveAppointment = new GetDataFromPHP();
+        String params = "{\"appointment_id\":"+appointment_id+",\"is_confirm\": 1}";
+        try {
+            string = approveAppointment.execute("http://35.178.209.191/COMP6239/server/api/Appointment/update_appointment_approval.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
