@@ -23,13 +23,13 @@ public class RequestListAdapter extends ArrayAdapter {
         ListViewData listView = (ListViewData) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         TextView dataName = view.findViewById(R.id.list_student);
-        TextView studentId = view.findViewById(R.id.student_id);
+        TextView appointmentId = view.findViewById(R.id.appointment_id);
         TextView startTime = view.findViewById(R.id.start_time);
         TextView endTime = view.findViewById(R.id.end_time);
         dataName.setText(listView.getArg1());
         startTime.setText(listView.getArg2());
         endTime.setText(listView.getArg3());
-        studentId.setText(listView.getArg4());
+        appointmentId.setText(listView.getArg4());
         return view;
     }
 }

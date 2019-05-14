@@ -48,13 +48,12 @@ public class TutorRequestActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = view.findViewById(R.id.student_id);
-                String student_id = textView.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), TutorChatActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("counterpart_id", student_id);
-                bundle.putString("my_id", String.valueOf(tutor_id));
-                intent.putExtra("bundle", bundle);
+                TextView textView = view.findViewById(R.id.appointment_id);
+
+                String appointment_id = textView.getText().toString();
+
+                Intent intent = new Intent(getApplicationContext(), AppointmentApproveActivity.class);
+                intent.putExtra("appointment_id", appointment_id);
                 startActivity(intent);
                 finish();
             }
@@ -86,7 +85,7 @@ public class TutorRequestActivity extends AppCompatActivity {
             jsonArray = jsonObject.getJSONArray("requests");
             for (int i = 0; i < jsonArray.length(); i++) {
                 info = jsonArray.getJSONObject(i);
-                data_list.add(new ListViewData(info.getString("first_name"),info.getString("start_time"),info.getString("end_time"), info.getString("student_user_id")));
+                data_list.add(new ListViewData(info.getString("first_name"),info.getString("start_time"),info.getString("end_time"), info.getString("appointment_id")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
