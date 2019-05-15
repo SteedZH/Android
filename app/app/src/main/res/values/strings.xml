@@ -6,14 +6,17 @@
     <!-- Strings related to login -->
     <string name="prompt_username">User Name</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_sign_in_option">Sign in with your social media: </string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_sign_up_student">Sign up for student</string>
     <string name="action_sign_up_tutor">Register as a verified tutor</string>
-    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_username">This username is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_incorrect_login">This username or password is incorrect</string>
+    <string name="error_connection">Please check your internet connection</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_permission">Your account do not have permission to use this app. Please contact our customer services. </string>
 
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 

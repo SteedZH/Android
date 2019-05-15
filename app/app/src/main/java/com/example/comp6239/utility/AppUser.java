@@ -1,9 +1,9 @@
 package com.example.comp6239.utility;
 
 public class AppUser {
-    private static int permission = 0;
 
     private static int user_id = 0;
+    private static int permission = 0;
     private static String username = "DUNNO";
     private static String email = "email@dunno.com";
 

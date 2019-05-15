@@ -1,9 +1,9 @@
 <?php 
     /*
         permission
-            0:  Administrator
-            1:  Tutor
-            2:  Student
+            2:  Administrator
+            2:  Tutor
+            1:  Student
     */
     header("Content-Type: application/json; charset=UTF-8");
     set_time_limit(0);
@@ -38,10 +38,10 @@
     function login($username, $password) {
         global $return_json_arr;
         $isValueValid = true;
-        $user_id="0";
+        $user_id=0;
         $sys_password="";
         
-        $permission="0";
+        $permission=0;
         $email="";
         $create_time="";
         
@@ -52,11 +52,11 @@
         $gender="";
         
         //Tutor
-        $subject_id="-1";
+        $subject_id=-1;
         $postcode="";
         $address="";
         $education="";
-        $is_approved="0";
+        $is_approved=0;
         
         //Student
         $descripion="";
@@ -99,9 +99,9 @@
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
                     //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-                    $user_id = $row["user_id"];
-                    $sys_password=$row["password"];
-                    $email=$row['email'];
+                    $user_id = (int)$row["user_id"];
+                    $sys_password = $row["password"];
+                    $email = $row['email'];
                 }
                 
             } else {
@@ -115,7 +115,7 @@
             }
             
             if ($password === $sys_password) {
-                $return_json_arr['user_id']=$user_id;
+                $return_json_arr['user_id'] = $user_id;
                 $return_json_arr['username']=$username;
                 $return_json_arr['email']=$email;
                 
@@ -124,8 +124,8 @@
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows > 0) {
-                    $permission="1";
-                    $is_approved="1";
+                    $permission=3;
+                    $is_approved=1;
                     
                     $return_json_arr['result'] = 'SUCCESS';
                     $return_json_arr['permission'] = $permission;
@@ -141,7 +141,7 @@
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-                        $is_approved=$row["is_approved"];
+                        $is_approved = (int)$row["is_approved"];
                         
                         $postcode=$row["postcode"];
                         $address=$row["address"];
@@ -152,7 +152,7 @@
                         $dob=$row["dob"];
                         $gender=$row["gender"];
                     }
-                    $permission="2";
+                    $permission=2;
                     
                     $return_json_arr['result'] = 'SUCCESS';
                     $return_json_arr['permission'] = $permission;
@@ -186,8 +186,8 @@
                         $dob=$row["dob"];
                         $gender=$row["gender"];
                     }
-                    $permission="3";
-                    $is_approved="1";
+                    $permission=1;
+                    $is_approved=1;
                     $return_json_arr['result'] = 'SUCCESS';
                     $return_json_arr['permission'] = $permission;
                     $return_json_arr['is_approved'] = $is_approved;

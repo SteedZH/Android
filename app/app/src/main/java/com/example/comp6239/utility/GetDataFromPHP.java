@@ -3,6 +3,9 @@ package com.example.comp6239.utility;
 import android.os.AsyncTask;
 import android.widget.SearchView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -48,7 +51,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
 //            System.out.println(stringBuffer);
             bufferedReader.close();
             inputStreamReader.close();
-            // 释放资源
+
             inputStream.close();
             httpURLConnection.disconnect();
         } catch (Exception e) {
@@ -62,12 +65,33 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         super.onPostExecute(s);
     }
 
+    public static String login(String username, String password){
+        String string = "";
+        GetDataFromPHP getTutors = new GetDataFromPHP();
+        JSONObject sendObj = new JSONObject();
+
+        try {
+            sendObj.put("username", username);
+            sendObj.put("password", password);
+
+            string = getTutors.execute(AppConfigs.BACKEND_URL + "Tutor/get_tutors.php", sendObj.toString()).get();
+        } catch (JSONException je) {
+            je.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return string;
+    }
+
     public static String getTutor(String tutorName, int tutorSubject, String tutorLocation){
         String string = "";
         GetDataFromPHP getTutors = new GetDataFromPHP();
         String params = "{\"tutorName\":\""+tutorName+"\",\"tutorSubject\":"+tutorSubject+",\"tutorLocation\":\""+tutorLocation+"\"}";
         try {
-            string=getTutors.execute("http://35.178.209.191/COMP6239/server/api/Tutor/get_tutors.php", params).get();
+            string=getTutors.execute(AppConfigs.BACKEND_URL + "Tutor/get_tutors.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -82,7 +106,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getAppointments = new GetDataFromPHP();
         String params = "{\"tutor_id\":"+tutorId+"}";
         try {
-            string = getAppointments.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_appointments.php", params).get();
+            string = getAppointments.execute(AppConfigs.BACKEND_URL + "Appointment/get_appointments.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -96,7 +120,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getTutorDetails = new GetDataFromPHP();
         String params = "{\"tutor_id\":"+tutorId+"}";
         try {
-            string = getTutorDetails.execute("http://35.178.209.191/COMP6239/server/api/Tutor/get_tutor_details.php", params).get();
+            string = getTutorDetails.execute(AppConfigs.BACKEND_URL + "Tutor/get_tutor_details.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -110,7 +134,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getSubjects = new GetDataFromPHP();
         String params = "";
         try {
-            string = getSubjects.execute("http://35.178.209.191/COMP6239/server/api/Subject/get_subjects.php", params).get();
+            string = getSubjects.execute(AppConfigs.BACKEND_URL + "Subject/get_subjects.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -125,7 +149,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getRequests = new GetDataFromPHP();
         String params = "{\"tutor_id\":"+tutorId+"}";
         try {
-            string = getRequests.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_requests.php", params).get();
+            string = getRequests.execute(AppConfigs.BACKEND_URL + "Appointment/get_requests.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -139,7 +163,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getTutors = new GetDataFromPHP();
         String params = "{\"student_id\":"+studentId+",\"tutor_id\":"+tutorId+",\"start_time\":\""+startTime+"\",\"end_time\":\""+endTime+"\"}";
         try {
-            string=getTutors.execute("http://35.178.209.191/COMP6239/server/api/Appointment/set_appointment_request.php", params).get();
+            string=getTutors.execute(AppConfigs.BACKEND_URL + "Appointment/set_appointment_request.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -154,7 +178,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getTutors = new GetDataFromPHP();
         String params = "{\"sender_user_id\":"+senderId+",\"receiver_user_id\":"+receiverId+"}";
         try {
-            string=getTutors.execute("http://35.178.209.191/COMP6239/server/api/Message/get_chat_messages.php", params).get();
+            string=getTutors.execute(AppConfigs.BACKEND_URL + "Message/get_chat_messages.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -169,7 +193,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP getAppointment = new GetDataFromPHP();
         String params = "{\"appointment_id\":"+appointmentId+"}";
         try {
-            string = getAppointment.execute("http://35.178.209.191/COMP6239/server/api/Appointment/get_request_details.php", params).get();
+            string = getAppointment.execute(AppConfigs.BACKEND_URL + "Appointment/get_request_details.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -183,7 +207,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         GetDataFromPHP approveAppointment = new GetDataFromPHP();
         String params = "{\"appointment_id\":"+appointment_id+",\"is_confirm\": 1}";
         try {
-            string = approveAppointment.execute("http://35.178.209.191/COMP6239/server/api/Appointment/update_appointment_approval.php", params).get();
+            string = approveAppointment.execute(AppConfigs.BACKEND_URL + "Appointment/update_appointment_approval.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
