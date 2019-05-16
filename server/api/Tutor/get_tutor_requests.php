@@ -51,6 +51,8 @@
                 while($row = $result->fetch_assoc()) {
                     $tutor = array();
                     //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+                    $tutor['user_id'] = $row["user_id"];
+                    $tutor['first_name'] = $row["first_name"];
                     $tutor['email'] = $row["email"];
                     $tutor['subject_id'] = $row["subject_id"];
                     $tutors[] = $tutor;
