@@ -1,5 +1,7 @@
 package com.example.comp6239;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.example.comp6239.utility.AppUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +60,7 @@ public class StudentMainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(StudentMainActivity.this,StudentProfileActivity.class);
                 startActivity(intent);
-                StudentMainActivity.this.finish();
+                //StudentMainActivity.this.finish();
             }
         });
 
@@ -80,19 +85,28 @@ public class StudentMainActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem menuItem) {
-//        switch (menuItem.getItemId()) {
-//            case android.R.id.home:
-//                Intent homeIntent = new Intent(this, StudentSearchActivity.class);
-//                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(homeIntent);
-//                finish();
-//                return true;
-//        }
-//        return (super.onOptionsItemSelected(menuItem));
-//    }
+    //Back Bar
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Do you want to logout from (" + AppUser.getUsername() + ")? ")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                    Intent intent = new Intent(StudentMainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+
+                    AppUser.logout();
+                    Toast.makeText(StudentMainActivity.this, "You have logout. ", Toast.LENGTH_LONG).show();
+
+                    finish();
+                }})
+            .setNegativeButton(android.R.string.no, null).show();
+    }
 
     private List<Map<String, Object>> initData() {
         for (int i = 0; i < icons.length; i++) {

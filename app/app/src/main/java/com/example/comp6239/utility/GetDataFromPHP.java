@@ -1,6 +1,7 @@
 package com.example.comp6239.utility;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.SearchView;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Content-Type", "application/Json");
 
+            Log.d(strings[0],strings[1]);
 
             DataOutputStream out = new DataOutputStream(
                     httpURLConnection.getOutputStream());
@@ -63,27 +65,6 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-    }
-
-    public static String login(String username, String password){
-        String string = "";
-        GetDataFromPHP getTutors = new GetDataFromPHP();
-        JSONObject sendObj = new JSONObject();
-
-        try {
-            sendObj.put("username", username);
-            sendObj.put("password", password);
-
-            string = getTutors.execute(AppConfigs.BACKEND_URL + "Tutor/get_tutors.php", sendObj.toString()).get();
-        } catch (JSONException je) {
-            je.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return string;
     }
 
     public static String getTutor(String tutorName, int tutorSubject, String tutorLocation){

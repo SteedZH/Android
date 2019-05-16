@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.comp6239.utility.AppConfigs;
 import com.example.comp6239.utility.AppUser;
@@ -37,6 +39,12 @@ import com.example.comp6239.utility.GetDataFromPHP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,6 +154,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 populateAutoComplete();
             }
         }
+    }
+
+    public void loginUsingExternal(View view) {
+        Toast.makeText(LoginActivity.this, "Comming soon...", Toast.LENGTH_SHORT).show();
     }
 
     public void signupStudent(View view) {
@@ -337,27 +349,61 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            String response = "";
+            JSONObject sendObj = new JSONObject();
 
+            BufferedReader bufferedReader;
+            StringBuffer stringBuffer = new StringBuffer();
             try {
-                // Simulate network access.
-                //Thread.sleep(2000);
-                response = GetDataFromPHP.login(mUsername, mPassword);
-                receiveObj = new JSONObject(response);
+                URL url = new URL(AppConfigs.BACKEND_URL + "Authentication/login.php");
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setUseCaches(false);
 
-                jsonresult = receiveObj.getString("result");
-                jsondetails = receiveObj.getString("details");
-                is_approval = receiveObj.getInt("is_approved");
-                user_id = receiveObj.getInt("user_id");
-                permission = receiveObj.getInt("permission");
-                email = receiveObj.getString("email");
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setRequestProperty("Content-Type", "application/Json");
 
-            } catch (JSONException e) {
+                DataOutputStream out = new DataOutputStream(httpURLConnection.getOutputStream());
+
+                sendObj.put("username", mUsername);
+                sendObj.put("password", mPassword);
+
+                out.writeBytes(sendObj.toString());
+                out.flush();
+                out.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String str;
+                while ((str = bufferedReader.readLine()) != null) {
+                    stringBuffer.append(str);
+                }
+//            System.out.println(stringBuffer);
+                bufferedReader.close();
+                inputStreamReader.close();
+
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                //Log.d("Login",stringBuffer.toString());
+
+                receiveObj = new JSONObject(stringBuffer.toString());
+                Log.d("Login",receiveObj.toString());
+
+                jsonresult = receiveObj.optString("result");
+                jsondetails = receiveObj.optString("details");
+                is_approval = receiveObj.optInt("is_approved");
+                user_id = receiveObj.optInt("user_id");
+                permission = receiveObj.optInt("permission");
+                email = receiveObj.optString("email");
+
+            } catch (Exception e) {
+                e.printStackTrace();
                 return false;
-
             }
 
-            // TODO: register the new account here.
             return true;
         }
 
@@ -367,7 +413,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                if (jsonresult == "SUCCESS") {
+                if (jsonresult.equals("SUCCESS")) {
                     if (user_id != 0 && is_approval == 1  &&  permission != 0){
                         AppUser.login(user_id, permission, mUsername, email);
 
@@ -401,7 +447,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     mUsernameView.requestFocus();
                 }
 
-                finish();
+
             } else {
                 mPasswordView.setError(getString(R.string.error_connection));
                 mPasswordView.requestFocus();
