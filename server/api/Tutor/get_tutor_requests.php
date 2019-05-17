@@ -43,7 +43,7 @@
             }
             
             $sql =  "SELECT * FROM Tutor, User WHERE Tutor.user_id = User.user_id AND is_approved = 0;";
-            echo $sql;
+            //echo $sql;
             $result = $conn->query($sql);
             
             if ($result->num_rows > 0) {
