@@ -22,7 +22,7 @@
             android:layout_weight="0"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/NameEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -50,11 +50,12 @@
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/MaleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Male" />
+                android:text="Male"
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/radioButton6"
@@ -75,15 +76,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Age"
+            android:text="Data of Birth"
             android:textSize="@dimen/textView_textSize" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/DobEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="2000-01-01"
             android:ems="10"
-            android:inputType="number"
             android:layout_weight="1"/>
 
     </TableRow>
@@ -91,19 +92,19 @@
     <TableRow android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Education"
+            android:text="Description"
             android:textSize="@dimen/textView_textSize" />
 
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/Description"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:prompt="@array/education_array"/>
+            android:ems="10" />
 
 
     </TableRow>

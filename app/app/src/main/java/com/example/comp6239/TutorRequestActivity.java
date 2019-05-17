@@ -39,7 +39,6 @@ public class TutorRequestActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         tutor_id = AppUser.getUserId();
-        tutor_id = 11;
         initData();
         adapter = new RequestListAdapter(getApplicationContext(), R.layout.listview_tutor_main, data_list);
         listView = findViewById(R.id.requestListView);

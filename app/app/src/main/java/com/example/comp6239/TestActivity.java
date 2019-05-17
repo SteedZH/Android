@@ -54,15 +54,5 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-        Button Test = findViewById(R.id.button12);
-        Test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(TestActivity.this, StudentChatActivity.class);
-                startActivity(intent);
-                TestActivity.this.finish();
-            }
-        });
     }
 }

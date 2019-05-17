@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 
 public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
@@ -30,13 +32,13 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Content-Type", "application/Json");
 
-            Log.d(strings[0],strings[1]);
+//            Log.d(strings[0],strings[1]);
 
             DataOutputStream out = new DataOutputStream(
                     httpURLConnection.getOutputStream());
 
 
-            if (strings[1]!= "") {
+            if (strings[1]!= null) {
                 out.writeBytes(strings[1]);
                 out.flush();
             }
@@ -106,6 +108,8 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return string;
     }
@@ -122,7 +126,6 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         return string;
-
     }
 
     public static String getRequests(int tutorId){
@@ -196,5 +199,76 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         }
         return string;
     }
+
+    public static String getTutorRequest(){
+        String string = "";
+        GetDataFromPHP getTutorRequest = new GetDataFromPHP();
+        String params = "";
+        try {
+            string = getTutorRequest.execute(AppConfigs.BACKEND_URL + "Tutor/get_tutor_requests.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
+    public static String updateTutorRequest(String tutor_id){
+        String string = "";
+        GetDataFromPHP getTutorRequest = new GetDataFromPHP();
+        String params = "{\"user_id\":"+tutor_id+",\"is_approved\":1}";
+        try {
+            string = getTutorRequest.execute(AppConfigs.BACKEND_URL + "Tutor/update_tutor_approvals.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
+    public static String deleteSubject(String subjectId){
+        String string = "";
+        GetDataFromPHP getRequests = new GetDataFromPHP();
+        String params = "{\"subject_id\":"+subjectId+"}";
+        try {
+            string = getRequests.execute(AppConfigs.BACKEND_URL + "Subject/delete_subject.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
+    public static String updateSubject(String subjectId, String subject_name){
+        String string = "";
+        GetDataFromPHP getRequests = new GetDataFromPHP();
+        String params = "{\"subject_id\":"+subjectId +", \"name\":\""+subject_name+"\"}";
+        try {
+            string = getRequests.execute(AppConfigs.BACKEND_URL + "Subject/update_subject.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
+    public static String addSubject(String subject_name){
+        String string = "";
+        GetDataFromPHP getRequests = new GetDataFromPHP();
+        String params = "{\"name\":\""+subject_name+"\"}";
+        try {
+            string = getRequests.execute(AppConfigs.BACKEND_URL + "Subject/set_subject.php", params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return string;
+    }
+
 }
 

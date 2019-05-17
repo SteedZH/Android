@@ -3,18 +3,22 @@ package com.example.comp6239;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp6239.utility.AppUser;
+import com.example.comp6239.utility.GetDataFromPHP;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,17 +30,18 @@ public class StudentMainActivity extends AppCompatActivity {
     private GridView gridView;
     private List<Map<String, Object>> dataList;
     private SimpleAdapter adapter = null;
+    private List<Map<String, String>> subjectArray;
 
     private int[] icons = {
-            R.mipmap.picture0,
-            R.mipmap.picture1,
-            R.mipmap.picture2,
-            R.mipmap.picture3,
-            R.mipmap.picture4,
-            R.mipmap.picture5,
-            R.mipmap.picture6,
-            R.mipmap.picture7,
-            R.mipmap.picture8
+            R.mipmap.all,
+            R.mipmap.math,
+            R.mipmap.computer,
+            R.mipmap.physics,
+            R.mipmap.chemistry,
+            R.mipmap.biology,
+            R.mipmap.history,
+            R.mipmap.music,
+            R.mipmap.law
     };
     private String[] text = {"All", "Math", "Computer", "Physics", "Chemistry", "Biology", "History", "Music", "Law"};
 
@@ -45,12 +50,6 @@ public class StudentMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
-//        ActionBar actionBar = getSupportActionBar();
-//        assert actionBar != null;
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-
-
 
         //To profile Activity
         Button bt_profile= findViewById(R.id.profile);
@@ -64,26 +63,38 @@ public class StudentMainActivity extends AppCompatActivity {
             }
         });
 
+
         gridView = findViewById(R.id.student_needs_grid_view);
         dataList = new ArrayList<>();
+        subjectArray = new ArrayList<>();
+        initSubjectData();
         initData();
 
-        String[] form = {"image", "text"};
+        String[] from = {"image", "text"};
         int[] to = {R.id.subject_image, R.id.subject_text};
-        adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, form, to);
+        adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, from, to);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(StudentMainActivity.this, "你点击了第" + i, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), StudentSearchActivity.class);
-                intent.putExtra("subject_id",i);
-
-                startActivity(intent);
+                TextView subject_text = view.findViewById(R.id.subject_text);
+                String text = subject_text.getText().toString();
+                for (int j = 0; j < subjectArray.size(); j++) {
+                    if (text.equals(subjectArray.get(j).get("name"))) {
+                        Intent intent = new Intent(getApplicationContext(), StudentSearchActivity.class);
+                        intent.putExtra("subject_id",subjectArray.get(j).get("id"));
+//                        String iii = subjectArray.get(j).get("id");
+//                        String jjj = subjectArray.get(j).get("name");
+//                        Toast.makeText(StudentMainActivity.this, "你点击了第" + + "subject is "+subjectArray.get(j).get("name"), Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
+
+
 
     //Back Bar
     @Override
@@ -110,11 +121,42 @@ public class StudentMainActivity extends AppCompatActivity {
 
     private List<Map<String, Object>> initData() {
         for (int i = 0; i < icons.length; i++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("image", icons[i]);
-            map.put("text", text[i]);
-            dataList.add(map);
+            for (int j = 0; j<subjectArray.size(); j++) {
+                if (text[i].equals(subjectArray.get(j).get("name"))) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("image", icons[i]);
+                    map.put("text", text[i]);
+                    dataList.add(map);
+                    break;
+                }
+            }
         }
         return dataList;
+    }
+
+    private List<Map<String, String>> initSubjectData(){
+        String string = GetDataFromPHP.getSubjects();
+
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        JSONObject info;
+        try {
+            jsonObject = new JSONObject(string);
+            jsonArray = jsonObject.getJSONArray("subjects");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                info = jsonArray.getJSONObject(i);
+                Map<String, String> subject = new HashMap<>();
+                subject.put("id", info.getString("subject_id"));
+                subject.put("name", info.getString("name"));
+                subjectArray.add(subject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> temp = new HashMap<>();
+        temp.put("id", "0");
+        temp.put("name", "All");
+        subjectArray.add(temp);
+        return subjectArray;
     }
 }

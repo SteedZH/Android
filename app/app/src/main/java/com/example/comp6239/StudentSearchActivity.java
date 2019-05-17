@@ -85,7 +85,7 @@ public class StudentSearchActivity extends AppCompatActivity {
 
         //Get subject ID
         int subject_id ;
-        subject_id = getIntent().getExtras().getInt("subject_id");
+        subject_id = Integer.parseInt(getIntent().getExtras().getString("subject_id"));
 //        System.out.println(subject_id);
         initData("",subject_id, "");
 

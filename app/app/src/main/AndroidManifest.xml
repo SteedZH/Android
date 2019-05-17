@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AppointmentApproveActivity"></activity>
+        <activity android:name=".ManagerSubjectActivity"></activity>
+        <activity android:name=".AppointmentApproveActivity" />
         <activity android:name=".TutorDetailActivity" />
         <activity android:name=".StudentChatActivity" />
         <activity android:name=".TutorChatActivity" />
@@ -29,6 +30,7 @@
         </activity>
         <activity android:name=".TutorAdjustActivity" />
         <activity android:name=".TutorRequestActivity" />
+        <activity android:name=".TutorRequestDetailActivity" />
         <activity android:name=".TutorMainActivity" />
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".StudentMainActivity" />
