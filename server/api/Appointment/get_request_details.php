@@ -16,7 +16,7 @@
         $appointment_id = $receive_json_obj["appointment_id"];
     }
     
-    getAppointments($appointment_id);
+    getAppointRequests($appointment_id);
     
     flush();
     ob_start();
@@ -25,7 +25,7 @@
     
     
     
-    function getAppointments($appointment_id) {
+    function getAppointRequests($appointment_id) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();
@@ -63,11 +63,17 @@
                     //$appointment = array();
                     $return_json_arr['appointment_id'] = $row["appointment_id"];
                     $return_json_arr['student_user_id'] = $row["student_user_id"];
-                    $return_json_arr['username'] = $row["username"];
-                    $return_json_arr['first_name'] = $row["first_name"];
-                    $return_json_arr['last_name'] = $row["last_name"];
-                    $return_json_arr['gender'] = $row["gender"];
-                    $return_json_arr['dob'] = $row["dob"];
+					$return_json_arr['tutor_user_id'] = $row["tutor_user_id"];
+                    $return_json_arr['s_username'] = $row["s_username"];
+                    $return_json_arr['s_firstname'] = $row["s_firstname"];
+					$return_json_arr['s_lastname'] = $row["s_lastname"];
+                    $return_json_arr['s_gender'] = $row["s_gender"];
+					$return_json_arr['s_dob'] = $row["s_dob"];
+					$return_json_arr['t_username'] = $row["t_username"];
+                    $return_json_arr['t_firstname'] = $row["t_firstname"];
+					$return_json_arr['t_lastname'] = $row["t_lastname"];
+                    $return_json_arr['t_gender'] = $row["t_gender"];
+                    $return_json_arr['t_dob'] = $row["t_dob"];
                     $return_json_arr['start_time'] = $row["start_time"];
                     $return_json_arr['end_time'] = $row["end_time"];
                 }

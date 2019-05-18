@@ -11,12 +11,17 @@
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
     $tutor_id = 0;
+	$student_id = 0;
     
     if (isset($receive_json_obj["tutor_id"])) {
         $tutor_id = $receive_json_obj["tutor_id"];
     }
+	
+	if (isset($receive_json_obj["student_id"])) {
+        $student_id = $receive_json_obj["student_id"];
+    }
     
-    getRequests($tutor_id);
+    getRequests($tutor_id, $student_id);
     
     flush();
     ob_start();
@@ -34,9 +39,9 @@
         
         try{
             // Check null
-            if ($tutor_id <= 0) {
+            if ($tutor_id <= 0 && $student_id <= 0) {
                 $return_json_arr['code'] = 'NULL_TUTOR_ID';
-                $return_json_arr['details'] = 'A tutor Id must be specified. ';
+                $return_json_arr['details'] = 'A tutor Id or student Id must be specified. ';
                 return false;
             }
             
@@ -53,7 +58,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Request WHERE tutor_user_id = " . $tutor_id . ";";
+            $sql =  "SELECT * FROM View_Request WHERE tutor_user_id = " . $tutor_id . " OR student_user_id = " . $student_id . ";";
             //echo $sql;
             $result = $conn->query($sql);
             
@@ -63,9 +68,13 @@
                     $appointment = array();
                     $appointment['appointment_id'] = $row["appointment_id"];
                     $appointment['student_user_id'] = $row["student_user_id"];
-                    $appointment['username'] = $row["username"];
-                    $appointment['first_name'] = $row["first_name"];
-                    $appointment['gender'] = $row["gender"];
+					$appointment['tutor_user_id'] = $row["tutor_user_id"];
+                    $appointment['s_username'] = $row["s_username"];
+                    $appointment['s_firstname'] = $row["s_firstname"];
+                    $appointment['s_gender'] = $row["s_gender"];
+					$appointment['t_username'] = $row["t_username"];
+                    $appointment['t_firstname'] = $row["t_firstname"];
+                    $appointment['t_gender'] = $row["t_gender"];
                     $appointment['start_time'] = $row["start_time"];
                     $appointment['end_time'] = $row["end_time"];
                     $appointments[] = $appointment;

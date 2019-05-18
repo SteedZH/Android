@@ -1,5 +1,7 @@
 package com.example.comp6239;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.comp6239.adapter.ListViewData;
 import com.example.comp6239.adapter.RequestListAdapter;
@@ -47,11 +50,32 @@ import java.util.List;
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     TextView textView = view.findViewById(R.id.appointment_id);
 
+                    new AlertDialog.Builder(AdminAproveTutorActiviry.this)
+                            .setTitle("Logout")
+                            .setMessage("Do you want to logout from (" + AppUser.getUsername() + ")? ")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                    Intent intent = new Intent(AdminAproveTutorActiviry.this, LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+
+                                    AppUser.logout();
+                                    Toast.makeText(AdminAproveTutorActiviry.this, "You have logout. ", Toast.LENGTH_LONG).show();
+
+                                    finish();
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
+
+                    /*
                     String appointment_id = textView.getText().toString();
                     Intent intent = new Intent();
                     intent.putExtra("appointment_id", appointment_id);
                     startActivity(intent);
                     finish();
+                    */
                 }
             });
         }
