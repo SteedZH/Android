@@ -16,7 +16,7 @@
         $appointment_id = $receive_json_obj["appointment_id"];
     }
     
-    getAppointRequests($appointment_id);
+    getAppointment($appointment_id);
     
     flush();
     ob_start();
@@ -25,7 +25,7 @@
     
     
     
-    function getAppointRequests($appointment_id) {
+    function getAppointment($appointment_id) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();
@@ -53,7 +53,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Request WHERE appointment_id = " . $appointment_id . ";";
+            $sql =  "SELECT * FROM View_Appointment WHERE appointment_id = " . $appointment_id . ";";
             //echo $sql;
             $result = $conn->query($sql);
             
@@ -81,7 +81,7 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_SELECT_FAIL';
-                $return_json_arr['details'] = 'There is no appointment request records in the database. ';
+                $return_json_arr['details'] = 'There is no appointment records in the database. ';
                 $conn->close();
                 return false;
                 
