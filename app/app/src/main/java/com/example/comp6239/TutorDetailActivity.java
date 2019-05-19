@@ -121,6 +121,7 @@ public class TutorDetailActivity extends AppCompatActivity {
             dataList.add(new ListViewData("Postcode: ",jsonObject.getString("postcode")));
             dataList.add(new ListViewData("address: ",jsonObject.getString("address")));
             dataList.add(new ListViewData("Education: ",jsonObject.getString("educations")));
+            dataList.add(new ListViewData("Price: ","£" + jsonObject.getString("price") + " per hour"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
