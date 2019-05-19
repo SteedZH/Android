@@ -31,32 +31,21 @@ import java.util.List;
 
 public class AdminMainActivity extends AppCompatActivity {
 
-    private List<Tutor> tutorRequests;
     private List<ListViewData> data_list = new ArrayList<>();
     private RequestTutorAdapter adapter;
     private ListView listView;
-    private Button subject_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
-        subject_button = findViewById(R.id.subject_change);
-        subject_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ManagerSubjectActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         initData();
         adapter = new RequestTutorAdapter(getApplicationContext(), R.layout.listview_admin_main, data_list);
         listView = findViewById(R.id.tutor_application_list);
         listView.setAdapter(adapter);
 
-        /*
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,30 +56,7 @@ public class AdminMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        */
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            new AlertDialog.Builder(AdminMainActivity.this)
-                            .setTitle("Logout")
-                            .setMessage("Do you want to logout from (" + AppUser.getUsername() + ")? ")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                                public void onClick(DialogInterface dialog, int whichButton) {
-
-                                    Intent intent = new Intent(AdminMainActivity.this, LoginActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-
-                                    AppUser.logout();
-                                    Toast.makeText(AdminMainActivity.this, "You have logout. ", Toast.LENGTH_LONG).show();
-
-                                    finish();
-                                }})
-                            .setNegativeButton(android.R.string.no, null).show();
-            }
-        });
 
     }
 
@@ -104,11 +70,18 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
             case R.id.menuManageCategory:
-                Toast.makeText(this, "\"Manage Category\" selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminMainActivity.this, ManagerSubjectActivity.class);
+                startActivity(intent);
                 break;
             // action with ID action_settings was selected
             case R.id.menuLogout:
@@ -117,7 +90,6 @@ public class AdminMainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return true;
     }
 

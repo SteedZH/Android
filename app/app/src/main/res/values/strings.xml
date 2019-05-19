@@ -50,6 +50,8 @@
     <string name="action_manage_category">Manage Tutor Categories</string>
     <string name="action_search">Search</string>
     <string name="prompt_search_tutor">Enter a Tutor name</string>
+    <string name="action_add_subject">Add Subjects</string>
+    <string name="action_change_subject">Change Subjects</string>
 
 
     <string-array name="education_array">

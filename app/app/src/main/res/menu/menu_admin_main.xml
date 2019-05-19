@@ -10,4 +10,13 @@
         android:title="@string/action_logout">
     </item>
 
+    <item
+        android:id="@+id/menuAddSubject"
+        android:title="@string/action_add_subject">
+    </item>
+
+    <item
+        android:id="@+id/menuChangeSubject"
+        android:title="@string/action_change_subject">
+    </item>
 </menu>
