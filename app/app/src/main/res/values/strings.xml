@@ -30,6 +30,9 @@
     <string name="prompt_confirm_password">Confirm Password</string>
     <string name="prompt_student_agree">By clicking the sign up button, I agree to register as a student, and I understand that the authority of Personal Tutor App would have the final say.</string>
     <string name="action_sign_up_short">Sign up</string>
+    <string name="error_invalid_confirm_password">The password is not matched. </string>
+    <string name="error_invalid_email_address">The email is invalid. </string>
+    <string name="error_invalid_names">The name is invalid. </string>
 
     <!-- Strings related to register tutor -->
     <string name="title_activity_tutor_register">Tutor Registration</string>
