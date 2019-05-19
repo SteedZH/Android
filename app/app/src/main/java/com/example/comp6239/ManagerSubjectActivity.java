@@ -108,23 +108,31 @@ public class ManagerSubjectActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView subject_text = view.findViewById(R.id.subject_text);
-                String text = subject_text.getText().toString();
-                for (int j = 0; j < subjectArray.size(); j++) {
-                    if (text.equals(subjectArray.get(j).get("name"))) {
-                        String str = GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
-                        try {
-                            JSONObject jsonObject = new JSONObject(str);
-                            if (jsonObject.getString("result").equals("SUCCESS")) {
-                                Toast.makeText(ManagerSubjectActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(ManagerSubjectActivity.this, "System also contain tutor of this subject.", Toast.LENGTH_SHORT).show();
-                            }
+                final String text = subject_text.getText().toString();
+                new AlertDialog.Builder(ManagerSubjectActivity.this)
+                        .setTitle("Delete Subject")
+                        .setMessage("Do you want to DELETE (" + text + ")? ")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                for (int j = 0; j < subjectArray.size(); j++) {
+                                    if (text.equals(subjectArray.get(j).get("name"))) {
+                                        String str = GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(str);
+                                            if (jsonObject.getString("result").equals("SUCCESS")) {
+                                                Toast.makeText(ManagerSubjectActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+                                            }else{
+                                                Toast.makeText(ManagerSubjectActivity.this, "System also contain tutor of this subject.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
     }
@@ -133,14 +141,16 @@ public class ManagerSubjectActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case android.R.id.home:
-                //Intent homeIntent = new Intent(this, StudentSearchActivity.class);
-                //homeIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //startActivity(homeIntent);
-                finish();
-                return true;
+            case R.id.menuAddSubject:
+
+                break;
+            case R.id.menuChangeSubject:
+
+                break;
+            default:
+                break;
         }
-        return (super.onOptionsItemSelected(menuItem));
+        return true;
     }
 
     //Back Bar

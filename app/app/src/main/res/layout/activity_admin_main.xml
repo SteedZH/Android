@@ -60,8 +60,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_tutor_application_requests"
-        android:layout_above="@+id/subject_change">
+        android:layout_below="@+id/title_tutor_application_requests">
 
         <ListView
             android:id="@+id/tutor_application_list"
@@ -69,12 +68,12 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/subject_change"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Manager  Subject" />
+    <!--<Button-->
+        <!--android:id="@+id/subject_change"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="Manager  Subject" />-->
 
 </RelativeLayout>
