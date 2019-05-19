@@ -247,15 +247,14 @@ public class ManagerSubjectActivity extends AppCompatActivity
     // defined by the NoticeDialogFragment.NoticeDialogListener interface
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
+        EditText origin_subject = dialog.getView().findViewById(R.id.original_subject);
+        String origin_text = origin_subject.getText().toString();
         // User touched the dialog's positive button
         for (int j = 0; j < subjectArray.size(); j++) {
             if (subject_name.equals(subjectArray.get(j).get("name"))) {
-                EditText origin_subject = findViewById(R.id.original_subject);
-                String origin_text = origin_subject.getText().toString();
                 String str = GetDataFromPHP.updateSubject(subjectArray.get(j).get("id"), origin_text);
-                
             }
-            }
+        }
     }
 
     @Override
