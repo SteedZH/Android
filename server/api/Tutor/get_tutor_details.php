@@ -75,6 +75,7 @@
                     $return_json_arr['postcode'] = $row["postcode"];
                     $return_json_arr['address'] = $row["address"];
                     $return_json_arr['educations'] = $row["educations"];
+					$return_json_arr['price'] = $row["price"];
                     $return_json_arr['is_approved'] = $row["is_approved"];
                     if(isset($row["weekday"]) && isset($row["datetime"])) {
                         $datetime['weekday'] = $row["weekday"];

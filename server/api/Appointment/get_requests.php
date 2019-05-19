@@ -30,7 +30,7 @@
     
     
     
-    function getRequests($tutor_id) {
+    function getRequests($tutor_id, $student_id) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();

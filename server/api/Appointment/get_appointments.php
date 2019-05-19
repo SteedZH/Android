@@ -11,12 +11,16 @@
     
     $receive_json_obj = json_decode(file_get_contents('php://input'), true);
     $tutor_id = 0;
+	$student_id = 0;
     
     if (isset($receive_json_obj["tutor_id"])) {
         $tutor_id = $receive_json_obj["tutor_id"];
     }
+	if (isset($receive_json_obj["student_id"])) {
+        $student_id = $receive_json_obj["student_id"];
+    }
     
-    getAppointments($tutor_id);
+    getAppointments($tutor_id, $student_id);
     
     flush();
     ob_start();
@@ -25,7 +29,7 @@
     
     
     
-    function getAppointments($tutor_id) {
+    function getAppointments($tutor_id, $student_id) {
         global $return_json_arr;
         $isValueValid = true;
         $appointments = array();
@@ -34,9 +38,9 @@
         
         try{
             // Check null
-            if ($tutor_id <= 0) {
+            if ($tutor_id <= 0 && $student_id <= 0) {
                 $return_json_arr['code'] = 'NULL_TUTOR_ID';
-                $return_json_arr['details'] = 'A tutor Id must be specified. ';
+                $return_json_arr['details'] = 'A tutor Id or student Id must be specified. ';
                 return false;
             }
             
@@ -53,7 +57,7 @@
                 
             }
             
-            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . ";";
+            $sql =  "SELECT * FROM View_Appointment WHERE tutor_user_id = " . $tutor_id . " OR student_user_id = " . $student_id . ";";
             //echo $sql;
             $result = $conn->query($sql);
             
@@ -62,18 +66,19 @@
                 while($row = $result->fetch_assoc()) {
                     $appointment = array();
                     $appointment['appointment_id'] = $row["appointment_id"];
-                    $return_json_arr['student_user_id'] = $row["student_user_id"];
-					$return_json_arr['tutor_user_id'] = $row["tutor_user_id"];
-                    $return_json_arr['s_username'] = $row["s_username"];
-                    $return_json_arr['s_firstname'] = $row["s_firstname"];
-					$return_json_arr['s_lastname'] = $row["s_lastname"];
-                    $return_json_arr['s_gender'] = $row["s_gender"];
-					$return_json_arr['s_dob'] = $row["s_dob"];
-					$return_json_arr['t_username'] = $row["t_username"];
-                    $return_json_arr['t_firstname'] = $row["t_firstname"];
-					$return_json_arr['t_lastname'] = $row["t_lastname"];
-                    $return_json_arr['t_gender'] = $row["t_gender"];
-                    $return_json_arr['t_dob'] = $row["t_dob"];
+                    $appointment['student_user_id'] = $row["student_user_id"];
+                    $appointment['student_user_id'] = $row["student_user_id"];
+					$appointment['tutor_user_id'] = $row["tutor_user_id"];
+                    $appointment['s_username'] = $row["s_username"];
+                    $appointment['s_firstname'] = $row["s_firstname"];
+					$appointment['s_lastname'] = $row["s_lastname"];
+                    $appointment['s_gender'] = $row["s_gender"];
+					$appointment['s_dob'] = $row["s_dob"];
+					$appointment['t_username'] = $row["t_username"];
+                    $appointment['t_firstname'] = $row["t_firstname"];
+					$appointment['t_lastname'] = $row["t_lastname"];
+                    $appointment['t_gender'] = $row["t_gender"];
+                    $appointment['t_dob'] = $row["t_dob"];
                     $appointment['start_time'] = $row["start_time"];
                     $appointment['end_time'] = $row["end_time"];
                     $appointments[] = $appointment;
