@@ -22,10 +22,13 @@
 
     <!-- Strings related to register student -->
     <string name="title_activity_student_register">Student Registration</string>
+    <string name="prompt_register_describe">Enter your personal information to continue:</string>
     <string name="prompt_first_name">First Name</string>
     <string name="prompt_last_name">Last Name</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_dob">Date of Birth (DD-MM-YYYY)</string>
     <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="prompt_student_agree">By clicking the sign up button, I agree to register as a student, and I understand that the authority of Personal Tutor App would have the final say.</string>
     <string name="action_sign_up_short">Sign up</string>
 
     <!-- Strings related to register tutor -->
@@ -34,7 +37,8 @@
     <string name="prompt_address">Address</string>
     <string name="prompt_postcode">Postcode</string>
     <string name="prompt_education">Education</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Tutor Registration</string>
+    <string name="prompt_tutor_agree">By clicking the sign up button, I agree to register as a tutor, and I understand that the authority of Personal Tutor App would have the final say.</string>
 
     <!-- Strings related to Admin Main -->
     <string name="title_admin_portal">Admin Portal</string>
