@@ -65,9 +65,9 @@
                     "INSERT INTO Administrator (user_id) VALUES ((SELECT user_id FROM View_User WHERE username = '" . $username . "'));";
             
             if ($conn->multi_query($sql) === TRUE) {
-                echo "New records created. ";
+                //echo "New records created. ";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                //echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_INSERT_FAIL';
                 $return_json_arr['details'] = 'There is a database error when inserting an administrator account record. ';
