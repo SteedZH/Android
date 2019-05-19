@@ -67,7 +67,7 @@
             $sql =  "UPDATE Subject SET name = '" . $name . "' WHERE subject_id = " . $subject_id . ";";
             
             if ($conn->query($sql) === TRUE) {
-                echo "New records updated. ";
+                //echo "New records updated. ";
                 $return_json_obj['result'] = 'SUCCESS';
                 $return_json_obj['subject_id'] = $subject_id;
                 $return_json_obj['name'] = $name;
