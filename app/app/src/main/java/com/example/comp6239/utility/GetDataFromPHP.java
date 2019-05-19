@@ -244,10 +244,10 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
 
     public static String updateSubject(String subjectId, String subject_name){
         String string = "";
-        GetDataFromPHP getRequests = new GetDataFromPHP();
+        GetDataFromPHP updateSubject = new GetDataFromPHP();
         String params = "{\"subject_id\":"+subjectId +", \"name\":\""+subject_name+"\"}";
         try {
-            string = getRequests.execute(AppConfigs.BACKEND_URL + "Subject/update_subject.php", params).get();
+            string = updateSubject.execute(AppConfigs.BACKEND_URL + "Subject/update_subject.php", params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

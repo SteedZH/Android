@@ -1,15 +1,21 @@
 package com.example.comp6239;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -17,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.comp6239.utility.AppUser;
 import com.example.comp6239.utility.GetDataFromPHP;
+import com.example.comp6239.utility.ChangeSubjectDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ManagerSubjectActivity extends AppCompatActivity {
+public class ManagerSubjectActivity extends AppCompatActivity
+                                    implements ChangeSubjectDialog.ChangeSubjectDialogListener{
 
     private GridView gridView;
     private List<Map<String, Object>> dataList;
@@ -36,6 +44,7 @@ public class ManagerSubjectActivity extends AppCompatActivity {
     private TextView textView_id;
     private TextView textView_name;
     private Button add_button;
+    private String subject_name;
 
 
     private int[] icons = {
@@ -108,16 +117,15 @@ public class ManagerSubjectActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView subject_text = view.findViewById(R.id.subject_text);
-                final String text = subject_text.getText().toString();
+                subject_name = subject_text.getText().toString();
                 new AlertDialog.Builder(ManagerSubjectActivity.this)
-                        .setTitle("Delete Subject")
-                        .setMessage("Do you want to DELETE (" + text + ")? ")
+                        .setTitle("Amend Subject")
+                        .setMessage("Please choose operation on (" + subject_name + ")? ")
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 for (int j = 0; j < subjectArray.size(); j++) {
-                                    if (text.equals(subjectArray.get(j).get("name"))) {
+                                    if (subject_name.equals(subjectArray.get(j).get("name"))) {
                                         String str = GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
                                         try {
                                             JSONObject jsonObject = new JSONObject(str);
@@ -132,21 +140,36 @@ public class ManagerSubjectActivity extends AppCompatActivity {
                                     }
                                 }
                             }})
-                        .setNegativeButton(android.R.string.no, null).show();
+                        .setNegativeButton("Change", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                showNoticeDialog();
+                            }
+                        })
+                        .setNeutralButton("Cancel", null).show();
             }
         });
     }
 
-    //Back Tool Bar settings
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_admin_subject, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menuAddSubject:
-
+                showNoticeDialog();
                 break;
-            case R.id.menuChangeSubject:
-
-                break;
+            case android.R.id.home:
+                Intent homeIntent =new Intent();
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                homeIntent = new Intent(ManagerSubjectActivity.this, AdminMainActivity.class);
+                startActivity(homeIntent);
+                finish();
             default:
                 break;
         }
@@ -213,5 +236,32 @@ public class ManagerSubjectActivity extends AppCompatActivity {
         return subjectArray;
     }
 
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new ChangeSubjectDialog();
+        dialog.show(getSupportFragmentManager(), "ChangeSubjectDialog");
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // User touched the dialog's positive button
+        for (int j = 0; j < subjectArray.size(); j++) {
+            if (subject_name.equals(subjectArray.get(j).get("name"))) {
+                EditText origin_subject = findViewById(R.id.original_subject);
+                String origin_text = origin_subject.getText().toString();
+                String str = GetDataFromPHP.updateSubject(subjectArray.get(j).get("id"), origin_text);
+                
+            }
+            }
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // User touched the dialog's negative button
+        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+    }
 
 }
