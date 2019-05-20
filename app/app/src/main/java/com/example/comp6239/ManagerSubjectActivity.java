@@ -74,8 +74,7 @@ public class ManagerSubjectActivity extends AppCompatActivity{
         gridView = findViewById(R.id.manager_grid_view);
         dataList = new ArrayList<>();
         subjectArray = new ArrayList<>();
-        refresh();
-        /*
+
         initSubjectData();
         initData();
 
@@ -137,7 +136,7 @@ public class ManagerSubjectActivity extends AppCompatActivity{
                         .setNeutralButton("Cancel", null).show();
             }
         });
-        */
+
     }
 
     @Override
@@ -151,7 +150,7 @@ public class ManagerSubjectActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menuAddSubject:
-//                showNoticeDialog();
+                addDialog();
                 break;
             case android.R.id.home:
                 Intent homeIntent =new Intent();
@@ -261,6 +260,36 @@ public class ManagerSubjectActivity extends AppCompatActivity{
         alertDialog.show();
     }
 
+    public void addDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                ManagerSubjectActivity.this);
+        // Get the layout inflater
+        LayoutInflater inflater = ManagerSubjectActivity.this.getLayoutInflater();
+        final View mView = inflater.inflate(R.layout.dialog_add_change, null);
+        builder.setView(mView)
+                .setTitle("Please input subject to add")
+                // Add action buttons
+                .setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                final EditText subject_editText = mView.findViewById(R.id.original_subject);
+                                final String subject_text = subject_editText.getText().toString();
+                                        String str = GetDataFromPHP.addSubject(subject_text);
+                                        refresh();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+        // return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 //    public void showNoticeDialog() {
 //        // Create an instance of the dialog fragment and show it
 //        DialogFragment dialog = new ChangeSubjectDialog();
@@ -289,66 +318,7 @@ public class ManagerSubjectActivity extends AppCompatActivity{
 //    }
 
     public void refresh() {
-        subjectArray = new ArrayList<>();
-        initSubjectData();
-        initData();
-
-        adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, from, to);
-        gridView.setAdapter(adapter);
-
-        gridView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                TextView subject_text = v.findViewById(R.id.subject_text);
-                String text = subject_text.getText().toString();
-                for (int j = 0; j < subjectArray.size(); j++) {
-                    if (text.equals(subjectArray.get(j).get("name"))) {
-                        GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
-                    }
-                }
-                return true;
-            }
-        });
-
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView subject_text = view.findViewById(R.id.subject_text);
-                subject_name = subject_text.getText().toString();
-                new AlertDialog.Builder(ManagerSubjectActivity.this)
-                        .setTitle("Amend Subject")
-                        .setMessage("Please choose operation on (" + subject_name + ")? ")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                for (int j = 0; j < subjectArray.size(); j++) {
-                                    if (subject_name.equals(subjectArray.get(j).get("name"))) {
-                                        String str = GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(str);
-                                            if (jsonObject.getString("result").equals("SUCCESS")) {
-                                                Toast.makeText(ManagerSubjectActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
-                                                refresh();
-                                            }else{
-                                                Toast.makeText(ManagerSubjectActivity.this, "System also contain tutor of this subject.", Toast.LENGTH_SHORT).show();
-                                                refresh();
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }
-                            }})
-                        .setNegativeButton("Change", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                changeDialog();
-
-                            }
-                        })
-                        .setNeutralButton("Cancel", null).show();
-            }
-        });
+        finish();
+        startActivity(getIntent());
     }
 }
