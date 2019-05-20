@@ -39,25 +39,6 @@ public class AdminMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
-
-        initData();
-        adapter = new RequestTutorAdapter(getApplicationContext(), R.layout.listview_admin_main, data_list);
-        listView = findViewById(R.id.tutor_application_list);
-        listView.setAdapter(adapter);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = view.findViewById(R.id.request_tutor_id);
-                String tutor_id = textView.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), TutorRequestDetailActivity.class);
-                intent.putExtra("tutor_id",tutor_id);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     @Override
@@ -72,7 +53,22 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //initData();
         initData();
+        adapter = new RequestTutorAdapter(getApplicationContext(), R.layout.listview_admin_main, data_list);
+        listView = findViewById(R.id.tutor_application_list);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = view.findViewById(R.id.request_tutor_id);
+                String tutor_id = textView.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), TutorRequestDetailActivity.class);
+                intent.putExtra("tutor_id",tutor_id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -103,6 +99,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private void initData(){
         String string = GetDataFromPHP.getTutorRequest();
+        data_list.clear();
 
         JSONObject jsonObject;
         JSONArray jsonArray;
@@ -118,4 +115,9 @@ public class AdminMainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public void refresh() {
+        finish();
+        startActivity(getIntent());
+    }
+
 }

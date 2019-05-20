@@ -42,7 +42,7 @@ public class TutorMainActivity extends AppCompatActivity {
             }
         });
         id = AppUser.getUserId();
-        id = 11;
+        //id = 8;
         initData();
         final AppointmentListAdapter adapter=new AppointmentListAdapter(TutorMainActivity.this, R.layout.listview_tutor_main,data_list);
         final ListView listView=findViewById(R.id.tutor_main_list_view);
@@ -61,7 +61,7 @@ public class TutorMainActivity extends AppCompatActivity {
             jsonArray = jsonObject.getJSONArray("appointments");
             for (int i = 0; i < jsonArray.length(); i++) {
                 info = jsonArray.getJSONObject(i);
-                data_list.add(new ListViewData(info.getString("first_name"),info.getString("start_time"),info.getString("end_time")));
+                data_list.add(new ListViewData(info.getString("s_username"),info.getString("start_time"),info.getString("end_time")));
             }
         } catch (JSONException e) {
             e.printStackTrace();

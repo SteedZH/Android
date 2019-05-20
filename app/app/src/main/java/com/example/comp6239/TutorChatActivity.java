@@ -167,9 +167,13 @@ public class TutorChatActivity extends AppCompatActivity implements View.OnClick
             if (msg.equals("")) {
                 Toast.makeText(getApplicationContext(), "Please Input Content", Toast.LENGTH_LONG).show();
             }else {
-                mWriter.writeUTF(msg);
-                mWriter.flush();
-                mHandler.sendMessage(mHandler.obtainMessage(0, "I: " + msg));
+                if (mSocket == null) {
+                    Toast.makeText(TutorChatActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                }else {
+                    mWriter.writeUTF(msg);
+                    mWriter.flush();
+                    mHandler.sendMessage(mHandler.obtainMessage(0, "I: " + msg));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

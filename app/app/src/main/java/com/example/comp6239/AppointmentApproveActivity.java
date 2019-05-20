@@ -51,7 +51,7 @@ public class AppointmentApproveActivity extends AppCompatActivity {
         initData(appointment_id);
 
         tutor_id = AppUser.getUserId();
-//        tutor_id = 11;
+//        tutor_id = 8;
         chat_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,10 +100,10 @@ public class AppointmentApproveActivity extends AppCompatActivity {
         try {
             jsonObject = new JSONObject(string);
             student_id = jsonObject.getString("student_user_id");
-            dataList.add(new ListViewData("FirstName: ",jsonObject.getString("first_name")));
-            dataList.add(new ListViewData("LastName: ",jsonObject.getString("last_name")));
-            dataList.add(new ListViewData("Date of Birth: ",jsonObject.getString("dob")));
-            dataList.add(new ListViewData("Gender:  ",jsonObject.getString("gender")));
+            dataList.add(new ListViewData("FirstName: ",jsonObject.getString("s_firstname")));
+            dataList.add(new ListViewData("LastName: ",jsonObject.getString("s_lastname")));
+            dataList.add(new ListViewData("Date of Birth: ",jsonObject.getString("s_dob")));
+            dataList.add(new ListViewData("Gender:  ",jsonObject.getString("s_gender")));
             dataList.add(new ListViewData("StartTime: ",jsonObject.getString("start_time")));
             dataList.add(new ListViewData("EndTime: ",jsonObject.getString("end_time")));
         } catch (JSONException e) {
