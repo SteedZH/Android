@@ -146,8 +146,10 @@ public class GetDataFromPHP extends AsyncTask<String, Integer, String> {
         String string = "";
         GetDataFromPHP getTutors = new GetDataFromPHP();
         String params = "{\"student_id\":"+studentId+",\"tutor_id\":"+tutorId+",\"start_time\":\""+startTime+"\",\"end_time\":\""+endTime+"\"}";
+        Log.d("setAppointmentRequest", params);
         try {
             string=getTutors.execute(AppConfigs.BACKEND_URL + "Appointment/set_appointment_request.php", params).get();
+            Log.d("setAppointmentRequest", string);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

@@ -141,7 +141,7 @@
                 $return_json_arr['tutor_id'] = $tutor_id;
                 
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                //echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_INSERT_FAIL';
                 $return_json_arr['details'] = 'There is a database error when inserting an appointment request record. ';

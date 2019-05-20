@@ -31,11 +31,13 @@
         <activity android:name=".TutorAdjustActivity" />
         <activity android:name=".TutorRequestActivity" />
         <activity android:name=".TutorRequestDetailActivity" />
-        <activity android:name=".TutorMainActivity" />
-        <activity android:name=".StudentProfileActivity" />
-        <activity android:name=".StudentMainActivity" />
+        <activity android:name=".TutorMainActivity" android:label="@string/title_tutor_portal" />
+        <activity android:name=".StudentProfileActivity" android:label="@string/action_my_profile" />
+        <activity android:name=".StudentMainActivity"
+            android:label="@string/title_student_portal"/>
         <activity
             android:name=".StudentSearchActivity"
+            android:label="title_search_portal"
             android:launchMode="singleTask" />
         <activity
             android:name=".AdminMainActivity"

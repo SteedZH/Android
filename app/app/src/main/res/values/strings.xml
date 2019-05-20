@@ -43,10 +43,19 @@
     <string name="title_activity_main">Tutor Registration</string>
     <string name="prompt_tutor_agree">By clicking the sign up button, I agree to register as a tutor, and I understand that the authority of Personal Tutor App would have the final say.</string>
 
+    <!-- Strings related to Student Main -->
+    <string name="title_student_portal">Student Portal</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_my_profile">My Profile</string>
+    <string name="action_my_unread_msg">Unread Messages</string>
+    <string name="title_search_portal">Search a tutor</string>
+
+    <string name="title_tutor_portal">Tutor Portal</string>
+
+
     <!-- Strings related to Admin Main -->
     <string name="title_admin_portal">Admin Portal</string>
     <string name="title_tutor_application_requests">Tutor Application Requests</string>
-    <string name="action_logout">Logout</string>
     <string name="action_manage_category">Manage Tutor Categories</string>
     <string name="action_search">Search</string>
     <string name="prompt_search_tutor">Enter a Tutor name</string>

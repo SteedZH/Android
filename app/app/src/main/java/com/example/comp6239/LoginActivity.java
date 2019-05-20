@@ -436,18 +436,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 startActivity(intent);
                                 LoginActivity.this.finish();
                                 break;
+                            default:
+                                new AlertDialog.Builder(LoginActivity.this)
+                                        .setTitle("Warning")
+                                        .setMessage(getString(R.string.error_permission))
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                                AppUser.logout();
+                                            }}).show();
+                                break;
                         }
 
 
-                        new AlertDialog.Builder(LoginActivity.this)
-                                .setTitle("Warning")
-                                .setMessage(getString(R.string.error_permission))
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        AppUser.logout();
-                                    }}).show();
 
                     }else {
                         mUsernameView.setError(getString(R.string.error_permission));

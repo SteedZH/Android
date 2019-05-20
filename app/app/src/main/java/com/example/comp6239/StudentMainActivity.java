@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -52,6 +55,7 @@ public class StudentMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_main);
 
         //To profile Activity
+        /*
         Button bt_profile= findViewById(R.id.profile);
         bt_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +66,7 @@ public class StudentMainActivity extends AppCompatActivity {
                 //StudentMainActivity.this.finish();
             }
         });
+        */
 
 
         gridView = findViewById(R.id.student_needs_grid_view);
@@ -94,7 +99,47 @@ public class StudentMainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_student_main, menu);
+        MenuItem btnLogout = menu.findItem(R.id.menuLogout);
+        btnLogout.setTitle(getResources().getString(R.string.action_logout) + " (" + AppUser.getUsername() + ")");
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.menuUnReadMsg:
+                intent = new Intent();
+                intent.setClass(StudentMainActivity.this,StudentProfileActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menuMyProfile:
+                intent = new Intent();
+                intent.setClass(StudentMainActivity.this,StudentProfileActivity.class);
+                startActivity(intent);
+                break;
+            // action with ID action_settings was selected
+            case R.id.menuLogout:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    public void logout() {
+        AppUser.logout();
+
+        Intent intent = new Intent(StudentMainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     //Back Bar
     @Override
