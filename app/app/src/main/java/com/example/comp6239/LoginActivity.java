@@ -3,6 +3,8 @@ package com.example.comp6239;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -436,10 +438,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 break;
                         }
 
-                        mTxtMsg.setText(getString(R.string.error_permission));
+
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("Warning")
+                                .setMessage(getString(R.string.error_permission))
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        AppUser.logout();
+                                    }}).show();
 
                     }else {
-                        mUsernameView.setError(getString(R.string.error_field_required));
+                        mUsernameView.setError(getString(R.string.error_permission));
+
+                        if(user_id != 0 && is_approval == 0  &&  permission == 2) {
+                            new AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle("Hi, " + mUsername)
+                                    .setMessage("Your tutor account is waiting for approval. Please come back later. ")
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                                        }}).show();
+                        }
                         mUsernameView.requestFocus();
                     }
                 }else {
