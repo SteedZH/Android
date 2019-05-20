@@ -133,8 +133,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 */
                 finish();
 
-
-
                 return true;
         }
         return (super.onOptionsItemSelected(menuItem));
@@ -389,10 +387,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 inputStream.close();
                 httpURLConnection.disconnect();
 
-                Log.d("Login",stringBuffer.toString());
+                Log.d("StudentRegister",stringBuffer.toString());
 
                 receiveObj = new JSONObject(stringBuffer.toString());
-                Log.d("Login",receiveObj.toString());
+                Log.d("StudentRegister",receiveObj.toString());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -408,6 +406,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             showRegistering(false);
 
             if (success) {
+                jsonresult = receiveObj.optString("result");
                 if (jsonresult.equals("SUCCESS")) {
                     Intent intent = new Intent();
 
