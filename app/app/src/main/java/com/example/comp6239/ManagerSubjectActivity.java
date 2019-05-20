@@ -36,6 +36,9 @@ import java.util.Map;
 
 public class ManagerSubjectActivity extends AppCompatActivity{
 
+    String[] from = {"image", "text"};
+    int[] to = {R.id.subject_image, R.id.subject_text};
+
     private GridView gridView;
     private List<Map<String, Object>> dataList;
     private SimpleAdapter adapter = null;
@@ -71,11 +74,12 @@ public class ManagerSubjectActivity extends AppCompatActivity{
         gridView = findViewById(R.id.manager_grid_view);
         dataList = new ArrayList<>();
         subjectArray = new ArrayList<>();
+        refresh();
+        /*
         initSubjectData();
         initData();
 
-        String[] from = {"image", "text"};
-        int[] to = {R.id.subject_image, R.id.subject_text};
+
         adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, from, to);
         gridView.setAdapter(adapter);
 
@@ -133,6 +137,7 @@ public class ManagerSubjectActivity extends AppCompatActivity{
                         .setNeutralButton("Cancel", null).show();
             }
         });
+        */
     }
 
     @Override
@@ -284,7 +289,66 @@ public class ManagerSubjectActivity extends AppCompatActivity{
 //    }
 
     public void refresh() {
-        finish();
-        startActivity(getIntent());
+        subjectArray = new ArrayList<>();
+        initSubjectData();
+        initData();
+
+        adapter = new SimpleAdapter(this, dataList, R.layout.gridview_subjects, from, to);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TextView subject_text = v.findViewById(R.id.subject_text);
+                String text = subject_text.getText().toString();
+                for (int j = 0; j < subjectArray.size(); j++) {
+                    if (text.equals(subjectArray.get(j).get("name"))) {
+                        GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
+                    }
+                }
+                return true;
+            }
+        });
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView subject_text = view.findViewById(R.id.subject_text);
+                subject_name = subject_text.getText().toString();
+                new AlertDialog.Builder(ManagerSubjectActivity.this)
+                        .setTitle("Amend Subject")
+                        .setMessage("Please choose operation on (" + subject_name + ")? ")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                for (int j = 0; j < subjectArray.size(); j++) {
+                                    if (subject_name.equals(subjectArray.get(j).get("name"))) {
+                                        String str = GetDataFromPHP.deleteSubject(subjectArray.get(j).get("id"));
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(str);
+                                            if (jsonObject.getString("result").equals("SUCCESS")) {
+                                                Toast.makeText(ManagerSubjectActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+                                                refresh();
+                                            }else{
+                                                Toast.makeText(ManagerSubjectActivity.this, "System also contain tutor of this subject.", Toast.LENGTH_SHORT).show();
+                                                refresh();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }})
+                        .setNegativeButton("Change", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                changeDialog();
+
+                            }
+                        })
+                        .setNeutralButton("Cancel", null).show();
+            }
+        });
     }
 }
