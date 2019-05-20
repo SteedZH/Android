@@ -39,6 +39,7 @@ public class TutorRequestActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         tutor_id = AppUser.getUserId();
+        //tutor_id = 8;
         initData();
         adapter = new RequestListAdapter(getApplicationContext(), R.layout.listview_tutor_main, data_list);
         listView = findViewById(R.id.requestListView);
@@ -84,7 +85,7 @@ public class TutorRequestActivity extends AppCompatActivity {
             jsonArray = jsonObject.getJSONArray("requests");
             for (int i = 0; i < jsonArray.length(); i++) {
                 info = jsonArray.getJSONObject(i);
-                data_list.add(new ListViewData(info.getString("first_name"),info.getString("start_time"),info.getString("end_time"), info.getString("appointment_id")));
+                data_list.add(new ListViewData(info.getString("s_username"),info.getString("start_time"),info.getString("end_time"), info.getString("appointment_id")));
             }
         } catch (JSONException e) {
             e.printStackTrace();

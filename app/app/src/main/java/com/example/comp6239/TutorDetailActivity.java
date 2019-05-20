@@ -83,7 +83,7 @@ public class TutorDetailActivity extends AppCompatActivity {
         chat_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentChatActivity.class);
+                Intent intent = new Intent(TutorDetailActivity.this, StudentChatActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("counterpart_id", String.valueOf(tutor_id));
                 bundle.putString("my_id", String.valueOf(student_id));
@@ -125,5 +125,9 @@ public class TutorDetailActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public void refresh() {
+        finish();
+        startActivity(getIntent());
     }
 }

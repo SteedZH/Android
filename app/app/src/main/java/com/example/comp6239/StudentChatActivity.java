@@ -208,6 +208,8 @@ public class StudentChatActivity extends AppCompatActivity implements View.OnCli
                 Intent homeIntent = new Intent(this, TutorDetailActivity.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 homeIntent.putExtra("tutor_id",counterpartId);
+                mConsoleStr.delete(0, mConsoleStr.length());
+                mConsoleTxt.setText(mConsoleStr.toString());
                 startActivity(homeIntent);
                 finish();
                 return true;
