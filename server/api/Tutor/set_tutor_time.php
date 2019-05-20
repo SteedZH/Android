@@ -13,7 +13,7 @@
     
     $user_id = 0;
     $daytime = array();
-    //$weekday = 0;   //0 = Sunday .. 7 = Saturday
+    //$weekday = 0;   //0 = Sunday .. 6 = Saturday
     //$time = 0;      //1 = AM, 2 = PM, 0 = Whole Day
     
     if (isset($receive_json_obj["user_id"])) {
@@ -69,17 +69,17 @@
                 foreach($daytime as $next) {
                     $sql .= "INSERT INTO TimePreference (user_id, weekday, datetime) VALUES (" . $user_id . ", " . $next['weekday'] . ", " . $next['time'] . ");";
                 }
-                echo $sql;
+                //echo $sql;
             }
             
             if ($conn->multi_query($sql) === TRUE) {
-                echo "New time preference created. ";
+                //echo "New time preference created. ";
                 $return_json_arr['result'] = 'SUCCESS';
                 $return_json_arr['user_id'] = $user_id;
                 $return_json_arr['daytime'] = $daytime;
                 
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                //echo "Error: " . $sql . "<br>" . $conn->error;
                 
                 $return_json_arr['code'] = 'DB_INSERT_FAIL';
                 $return_json_arr['details'] = 'There is a database error when inserting time preferences. ';

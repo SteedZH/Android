@@ -9,25 +9,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="5dp"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/time_slot_from"
+        android:layout_above="@+id/button_group"
         >
     </ListView>
-
-    <EditText
-        android:id="@+id/time_slot_from"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:hint="StartTime: 2019-01-01 00:00:00"
-        android:layout_above="@+id/time_slot_to" />
-
-    <EditText
-        android:id="@+id/time_slot_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:hint="EndTime: 2019-01-01 00:01:00"
-        android:layout_above="@+id/button_group"/>
 
     <LinearLayout
         android:id="@+id/button_group"
@@ -41,7 +25,7 @@
             android:id="@+id/to_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CHAT"
+            android:text="Chat"
             android:layout_weight="1"/>
 
         <Button
