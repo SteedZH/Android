@@ -20,42 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tip"
-        android:layout_above="@+id/containerLL"
         android:id="@+id/manager_grid_view"
         android:layout_marginTop="12dp"
+        android:layout_alignParentBottom="true"
         android:numColumns="3">
 
     </GridView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/containerLL"
-        android:layout_above="@+id/subject_add_update">
-
-        <EditText
-            android:id="@+id/add_subject_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add id"
-            android:layout_marginVertical="3dp"
-            android:layout_weight="2"/>
-
-        <EditText
-            android:id="@+id/add_subject_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add subject name"
-            android:layout_marginVertical="3dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/subject_add_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Add subjects"/>
 
 </RelativeLayout>

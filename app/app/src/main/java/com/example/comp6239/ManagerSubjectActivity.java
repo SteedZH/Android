@@ -34,16 +34,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ManagerSubjectActivity extends AppCompatActivity
-                                    implements ChangeSubjectDialog.ChangeSubjectDialogListener{
+public class ManagerSubjectActivity extends AppCompatActivity{
 
     private GridView gridView;
     private List<Map<String, Object>> dataList;
     private SimpleAdapter adapter = null;
     private List<Map<String, String>> subjectArray;
-    private TextView textView_id;
-    private TextView textView_name;
-    private Button add_button;
     private String subject_name;
 
 
@@ -65,9 +61,6 @@ public class ManagerSubjectActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_subject);
-        textView_id = findViewById(R.id.add_subject_id);
-        textView_name = findViewById(R.id.add_subject_name);
-        add_button = findViewById(R.id.subject_add_update);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -100,18 +93,6 @@ public class ManagerSubjectActivity extends AppCompatActivity
             }
         });
 
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (textView_id.getText().toString().equals("")) {
-                    GetDataFromPHP.addSubject(textView_name.getText().toString());
-                    Toast.makeText(getApplicationContext(), "You add subject" + textView_name.getText().toString() + "successfully!", Toast.LENGTH_LONG).show();
-                }else {
-                    GetDataFromPHP.updateSubject(textView_id.getText().toString(), textView_name.getText().toString());
-                    Toast.makeText(getApplicationContext(), "You update subject" + textView_name.getText().toString() + "successfully!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -131,8 +112,10 @@ public class ManagerSubjectActivity extends AppCompatActivity
                                             JSONObject jsonObject = new JSONObject(str);
                                             if (jsonObject.getString("result").equals("SUCCESS")) {
                                                 Toast.makeText(ManagerSubjectActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+                                                refresh();
                                             }else{
                                                 Toast.makeText(ManagerSubjectActivity.this, "System also contain tutor of this subject.", Toast.LENGTH_SHORT).show();
+                                                refresh();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -143,7 +126,8 @@ public class ManagerSubjectActivity extends AppCompatActivity
                         .setNegativeButton("Change", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                showNoticeDialog();
+                                changeDialog();
+
                             }
                         })
                         .setNeutralButton("Cancel", null).show();
@@ -162,7 +146,7 @@ public class ManagerSubjectActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menuAddSubject:
-                showNoticeDialog();
+//                showNoticeDialog();
                 break;
             case android.R.id.home:
                 Intent homeIntent =new Intent();
@@ -236,31 +220,71 @@ public class ManagerSubjectActivity extends AppCompatActivity
         return subjectArray;
     }
 
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new ChangeSubjectDialog();
-        dialog.show(getSupportFragmentManager(), "ChangeSubjectDialog");
+    public void changeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                ManagerSubjectActivity.this);
+        // Get the layout inflater
+        LayoutInflater inflater = ManagerSubjectActivity.this.getLayoutInflater();
+        final View mView = inflater.inflate(R.layout.dialog_add_change, null);
+        builder.setView(mView)
+                .setTitle("Please input subject to substitute")
+                // Add action buttons
+                .setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                final EditText subject_editText = mView.findViewById(R.id.original_subject);
+                                final String subject_text = subject_editText.getText().toString();
+                                for (int j = 0; j < subjectArray.size(); j++) {
+                                    if (subject_name.equals(subjectArray.get(j).get("name"))) {
+                                        String str = GetDataFromPHP.updateSubject(subjectArray.get(j).get("id"), subject_text);
+                                        refresh();
+                                    }
+                                }
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+        // return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
-    // The dialog fragment receives a reference to this Activity through the
-    // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        EditText origin_subject = dialog.getView().findViewById(R.id.original_subject);
-        String origin_text = origin_subject.getText().toString();
-        // User touched the dialog's positive button
-        for (int j = 0; j < subjectArray.size(); j++) {
-            if (subject_name.equals(subjectArray.get(j).get("name"))) {
-                String str = GetDataFromPHP.updateSubject(subjectArray.get(j).get("id"), origin_text);
-            }
-        }
-    }
+//    public void showNoticeDialog() {
+//        // Create an instance of the dialog fragment and show it
+//        DialogFragment dialog = new ChangeSubjectDialog();
+//        dialog.show(getSupportFragmentManager(), "ChangeSubjectDialog");
+//    }
+//
+//    // The dialog fragment receives a reference to this Activity through the
+//    // Fragment.onAttach() callback, which it uses to call the following methods
+//    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+//    @Override
+//    public void onDialogPositiveClick(DialogFragment dialog) {
+//        EditText origin_subject = dialog.getView().findViewById(R.id.original_subject);
+//        String origin_text = origin_subject.getText().toString();
+//        // User touched the dialog's positive button
+//        for (int j = 0; j < subjectArray.size(); j++) {
+//            if (subject_name.equals(subjectArray.get(j).get("name"))) {
+//                String str = GetDataFromPHP.updateSubject(subjectArray.get(j).get("id"), origin_text);
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void onDialogNegativeClick(DialogFragment dialog) {
+//        // User touched the dialog's negative button
+//        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+//    }
 
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
-        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+    public void refresh() {
+        finish();
+        startActivity(getIntent());
     }
-
 }
